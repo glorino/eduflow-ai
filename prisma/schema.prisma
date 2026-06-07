@@ -289,6 +289,8 @@ model User {
   notifications Notification[]
   auditLogs     AuditLog[]
   activities    UserActivity[]
+  reviewedAdmissions  Admission[] @relation("AdmissionReviewer")
+  approvedAdmissions  Admission[] @relation("AdmissionApprover")
 }
 
 model Teacher {
@@ -540,7 +542,7 @@ model CBTExamResult {
 model CBTExamScheduler {
   id          String   @id @default(uuid())
   teacherId   String
-  examId      String
+  examId      String   @unique
   scheduledAt DateTime
   createdAt   DateTime @default(now())
 
@@ -562,7 +564,6 @@ model FinancialAccount {
   campus          Campus           @relation(fields: [campusId], references: [id])
   transactions    FinancialTransaction[]
   feeStructures   FeeStructure[]
-  feePayments     FeePayment[]
 }
 
 model FeeStructure {
