@@ -1,5 +1,7 @@
 import prisma from '@/lib/prisma';
 
+export const dynamic = 'force-dynamic';
+
 export default async function DashboardPage() {
   const [totalStudents, totalTeachers, totalParents, pendingAdmissions, recentPayments] = await Promise.all([
     prisma.student.count({ where: { isActive: true } }),
