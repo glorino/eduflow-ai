@@ -26,7 +26,7 @@ export class DisciplineAgent extends BaseAgent {
     Focus on restorative practices and student growth while maintaining school order.`,
   };
 
-  async execute(action: string, input: Record<string, unknown>, context?): Promise<AIAgentResult> {
+  async execute(action: string, input: Record<string, unknown>, context?: { organizationId: string; campusId?: string; userId: string }): Promise<AIAgentResult> {
     switch (action) {
       case 'recordIncident':
         return this.recordIncident(input);

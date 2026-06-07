@@ -23,7 +23,7 @@ export class ParentCommunicationAgent extends BaseAgent {
     Adapt tone based on context - from routine updates to urgent alerts.`,
   };
 
-  async execute(action: string, input: Record<string, unknown>, context?): Promise<AIAgentResult> {
+  async execute(action: string, input: Record<string, unknown>, context?: { organizationId: string; campusId?: string; userId: string }): Promise<AIAgentResult> {
     switch (action) {
       case 'sendRiskAlert':
         return this.sendRiskAlert(input);

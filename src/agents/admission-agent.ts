@@ -28,7 +28,7 @@ export class AdmissionAgent extends BaseAgent {
     Always provide a detailed reasoning for your decisions.`,
   };
 
-  async execute(action: string, input: Record<string, unknown>, context?): Promise<AIAgentResult> {
+  async execute(action: string, input: Record<string, unknown>, context?: { organizationId: string; campusId?: string; userId: string }): Promise<AIAgentResult> {
     switch (action) {
       case 'reviewApplication':
         return this.reviewApplication(input);

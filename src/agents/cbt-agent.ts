@@ -29,7 +29,7 @@ export class CBTAgent extends BaseAgent {
     Focus on fair assessment and identifying learning gaps.`,
   };
 
-  async execute(action: string, input: Record<string, unknown>, context?): Promise<AIAgentResult> {
+  async execute(action: string, input: Record<string, unknown>, context?: { organizationId: string; campusId?: string; userId: string }): Promise<AIAgentResult> {
     switch (action) {
       case 'createExam':
         return this.createExam(input);

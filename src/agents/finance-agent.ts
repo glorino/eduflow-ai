@@ -32,7 +32,7 @@ export class FinanceAgent extends BaseAgent {
     Focus on maximizing collection efficiency while maintaining good parent relations.`,
   };
 
-  async execute(action: string, input: Record<string, unknown>, context?): Promise<AIAgentResult> {
+  async execute(action: string, input: Record<string, unknown>, context?: { organizationId: string; campusId?: string; userId: string }): Promise<AIAgentResult> {
     switch (action) {
       case 'generateInvoice':
         return this.generateInvoice(input);

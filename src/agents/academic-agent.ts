@@ -40,7 +40,7 @@ export class AcademicAgent extends BaseAgent {
     Consider historical data, attendance patterns, and assessment results.`,
   };
 
-  async execute(action: string, input: Record<string, unknown>, context?): Promise<AIAgentResult> {
+  async execute(action: string, input: Record<string, unknown>, context?: { organizationId: string; campusId?: string; userId: string }): Promise<AIAgentResult> {
     switch (action) {
       case 'analyzePerformance':
         return this.analyzePerformance(input);

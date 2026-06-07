@@ -24,7 +24,7 @@ export class ReportingAgent extends BaseAgent {
     Focus on actionable intelligence and trend analysis.`,
   };
 
-  async execute(action: string, input: Record<string, unknown>, context?): Promise<AIAgentResult> {
+  async execute(action: string, input: Record<string, unknown>, context?: { organizationId: string; campusId?: string; userId: string }): Promise<AIAgentResult> {
     switch (action) {
       case 'studentReport':
         return this.studentReport(input);

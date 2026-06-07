@@ -24,7 +24,7 @@ export class AttendanceAgent extends BaseAgent {
     Focus on identifying students at risk of chronic absenteeism.`,
   };
 
-  async execute(action: string, input: Record<string, unknown>, context?): Promise<AIAgentResult> {
+  async execute(action: string, input: Record<string, unknown>, context?: { organizationId: string; campusId?: string; userId: string }): Promise<AIAgentResult> {
     switch (action) {
       case 'markAttendance':
         return this.markAttendance(input);

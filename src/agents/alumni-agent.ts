@@ -23,7 +23,7 @@ export class AlumniAgent extends BaseAgent {
     Focus on maintaining long-term relationships and facilitating alumni contributions.`,
   };
 
-  async execute(action: string, input: Record<string, unknown>, context?): Promise<AIAgentResult> {
+  async execute(action: string, input: Record<string, unknown>, context?: { organizationId: string; campusId?: string; userId: string }): Promise<AIAgentResult> {
     switch (action) {
       case 'migrateToAlumni':
         return this.migrateToAlumni(input);
