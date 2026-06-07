@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { BaseAgent, type AIAgentResult } from '../orchestrator';
+import { BaseAgent, type AIAgentResult } from './orchestrator';
 import prisma from '@/lib/prisma';
 import { sendEmail, buildEmailTemplate } from '@/lib/email';
 import { logNotification } from '@/lib/sms';

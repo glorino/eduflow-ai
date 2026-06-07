@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { BaseAgent, type AIAgentResult } from '../orchestrator';
+import { BaseAgent, type AIAgentResult } from './orchestrator';
 import prisma from '@/lib/prisma';
 
 const ExamAnalysisSchema = z.object({
