@@ -47,3 +47,5 @@ mobile/web-build/
 .idea/
 *.swp
 *.swo
+
+.vercel
