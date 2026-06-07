@@ -2,7 +2,15 @@ import { openai, OpenAIProvider } from '@ai-sdk/openai';
 import { generateObject, generateText } from 'ai';
 import { z } from 'zod';
 import prisma from '@/lib/prisma';
-import type { AIAgentConfig, AIAgentResult } from '@/types';
+import type { AIAgentConfig } from '@/types';
+
+export type AIAgentResult = {
+  success: boolean;
+  data?: unknown;
+  error?: string;
+  confidence?: number;
+  reasoning?: string;
+};
 
 // ============================================================
 // AI Orchestrator - Central AI Management
