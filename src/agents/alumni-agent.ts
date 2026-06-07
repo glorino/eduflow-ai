@@ -272,7 +272,7 @@ export class AlumniAgent extends BaseAgent {
     if (score >= 60) return 'C4';
     if (score >= 50) return 'C5';
     if (score >= 40) return 'C6';
-    if (score >= 30) 'D7';
+    if (score >= 30) return 'D7';
     if (score >= 20) return 'E8';
     return 'F9';
   }

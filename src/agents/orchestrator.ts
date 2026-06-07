@@ -1,4 +1,4 @@
-import { openai, OpenAIProvider } from '@ai-sdk/openai';
+import { createOpenAI, type OpenAIProvider } from '@ai-sdk/openai';
 import { generateObject, generateText } from 'ai';
 import { z } from 'zod';
 import prisma from '@/lib/prisma';
@@ -22,7 +22,7 @@ export class AIOrchestrator {
   private openaiProvider: OpenAIProvider;
 
   private constructor() {
-    this.openaiProvider = openai(process.env.OPENAI_API_KEY || '');
+    this.openaiProvider = createOpenAI({ apiKey: process.env.OPENAI_API_KEY || '' });
   }
 
   static getInstance(): AIOrchestrator {
@@ -173,7 +173,7 @@ export abstract class BaseAgent {
   abstract name: string;
   abstract config: AIAgentConfig;
 
-  protected openaiProvider = openai(process.env.OPENAI_API_KEY || '');
+  protected openaiProvider = createOpenAI({ apiKey: process.env.OPENAI_API_KEY || '' });
 
   abstract execute(
     action: string,

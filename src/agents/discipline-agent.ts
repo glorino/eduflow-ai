@@ -7,7 +7,7 @@ import { logNotification } from '@/lib/sms';
 const DisciplineAnalysisSchema = z.object({
   severity: z.enum(['LOW', 'MEDIUM', 'HIGH', 'CRITICAL']),
   category: z.string(),
-  recommendedAction: z.string,
+  recommendedAction: z.string(),
   parentNotificationRequired: z.boolean(),
   escalationRequired: z.boolean(),
   followUpDate: z.string(),
