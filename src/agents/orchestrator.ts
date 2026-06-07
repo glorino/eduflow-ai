@@ -126,7 +126,7 @@ export class AIOrchestrator {
         ],
       },
     };
-    return workflows[workflowName] || null;
+    return workflows[name] || null;
   }
 
   private async logAgentExecution(

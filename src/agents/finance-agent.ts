@@ -197,11 +197,6 @@ export class FinanceAgent extends BaseAgent {
     return {
       success: true,
       data: {
-        totalRevenue,
-        totalExpected,
-        outstanding,
-        overdue,
-        collectionRate,
         ...result,
       },
     };

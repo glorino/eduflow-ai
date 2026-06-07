@@ -198,7 +198,7 @@ export class AdmissionAgent extends BaseAgent {
       take: limit,
     });
 
-    const results = [];
+    const results: Array<AIAgentResult & { admissionId: string; studentName: string }> = [];
     for (const admission of pendingAdmissions) {
       const result = await this.reviewApplication({ admissionId: admission.id });
       results.push({

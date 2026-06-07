@@ -211,10 +211,6 @@ export class CBTAgent extends BaseAgent {
         examId,
         examTitle: exam.title,
         totalStudents: scores.length,
-        averageScore: average,
-        passRate,
-        highestScore: highest,
-        lowestScore: lowest,
         ...result,
       },
     };

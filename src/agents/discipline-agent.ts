@@ -103,7 +103,7 @@ export class DisciplineAgent extends BaseAgent {
 
     return {
       success: true,
-      data: { recordId: record.id, ...analysis.data },
+      data: { recordId: record.id, ...(analysis.data as Record<string, unknown>) },
     };
   }
 
@@ -115,13 +115,12 @@ export class DisciplineAgent extends BaseAgent {
       severity?: string;
     };
 
-    let incident = null;
-    if (recordId) {
-      incident = await prisma.disciplineRecord.findUnique({
-        where: { id: recordId },
-        include: { student: { include: { user: true } } },
-      });
-    }
+    const incident = recordId
+      ? await prisma.disciplineRecord.findUnique({
+          where: { id: recordId },
+          include: { student: { include: { user: true } } },
+        })
+      : null;
 
     const prompt = `Analyze this discipline incident:
     ${incident ? `Student: ${incident.student?.user?.firstName} ${incident.student?.user?.lastName}` : ''}

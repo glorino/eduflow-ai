@@ -146,7 +146,7 @@ export class AttendanceAgent extends BaseAgent {
       },
     });
 
-    const riskStudents = [];
+    const riskStudents: Array<{ studentId: string; studentName: string; attendanceRate: number; consecutiveAbsences: number; riskLevel: string }> = [];
     for (const student of students) {
       const total = student.attendance.length;
       const present = student.attendance.filter(a => a.status === 'PRESENT').length;
@@ -219,7 +219,7 @@ export class AttendanceAgent extends BaseAgent {
       include: { student: { include: { user: true } } },
     });
 
-    const byStudent = attendance.reduce((acc, a) => {
+    const byStudent: Record<string, { name: string; present: number; absent: number; late: number; total: number }> = attendance.reduce((acc: Record<string, { name: string; present: number; absent: number; late: number; total: number }>, a: { studentId: string; status: string; student: { user?: { firstName?: string; lastName?: string } } }) => {
       if (!acc[a.studentId]) {
         acc[a.studentId] = {
           name: `${a.student.user?.firstName || ''} ${a.student.user?.lastName || ''}`,
@@ -234,7 +234,7 @@ export class AttendanceAgent extends BaseAgent {
       else if (a.status === 'ABSENT') acc[a.studentId].absent++;
       else if (a.status === 'LATE') acc[a.studentId].late++;
       return acc;
-    }, {} as Record<string, { name: string; present: number; absent: number; late: number; total: number }>);
+    }, {});
 
     return {
       success: true,

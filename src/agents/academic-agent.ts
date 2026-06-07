@@ -115,10 +115,7 @@ export class AcademicAgent extends BaseAgent {
         studentName: `${student.user?.firstName || ''} ${student.user?.lastName || ''}`,
         className: student.class?.name,
         scores,
-        average,
-        grade,
         attendanceRate,
-        riskLevel,
         ...result,
       },
     };
@@ -244,8 +241,8 @@ export class AcademicAgent extends BaseAgent {
     const subjectAverages = Object.entries(subjectScores).map(([subject, scores]) => ({
       subject,
       scores,
-      average: calculateGPA(scores),
-      grade: calculateGrade(calculateGPA(scores)),
+      average: calculateGPA(scores as number[]),
+      grade: calculateGrade(calculateGPA(scores as number[])),
     }));
 
     const allScores = student.assessments.map(ar => ar.score);

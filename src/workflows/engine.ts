@@ -454,7 +454,7 @@ export class WorkflowEngine {
   }
 
   private getNestedValue(obj: Record<string, unknown>, path: string): unknown {
-    return path.split('.').reduce((current, key) => {
+    return path.split('.').reduce<unknown>((current, key) => {
       return (current as Record<string, unknown>)?.[key];
     }, obj);
   }

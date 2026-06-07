@@ -64,7 +64,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const results = [];
+    const results: unknown[] = [];
     for (const record of records) {
       const attendance = await prisma.attendance.upsert({
         where: {
