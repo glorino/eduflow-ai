@@ -1,0 +1,178 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+:root {
+  --eduflow-primary: #1e40af;
+  --eduflow-secondary: #7c3aed;
+  --eduflow-accent: #059669;
+  --eduflow-warning: #d97706;
+  --eduflow-danger: #dc2626;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+  background-color: #f8fafc;
+  color: #1e293b;
+  min-height: 100vh;
+}
+
+@layer base {
+  h1 { @apply text-3xl font-bold; }
+  h2 { @apply text-2xl font-semibold; }
+  h3 { @apply text-xl font-semibold; }
+  h4 { @apply text-lg font-medium; }
+}
+
+@layer components {
+  .card {
+    @apply bg-white rounded-xl border border-gray-200 shadow-sm;
+  }
+  
+  .card-header {
+    @apply px-6 py-4 border-b border-gray-200;
+  }
+  
+  .card-content {
+    @apply px-6 py-4;
+  }
+  
+  .btn-primary {
+    @apply bg-primary-600 text-white px-4 py-2 rounded-lg font-medium hover:bg-primary-700 transition-colors focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+  
+  .btn-secondary {
+    @apply bg-gray-100 text-gray-700 px-4 py-2 rounded-lg font-medium hover:bg-gray-200 transition-colors;
+  }
+  
+  .btn-success {
+    @apply bg-emerald-600 text-white px-4 py-2 rounded-lg font-medium hover:bg-emerald-700 transition-colors;
+  }
+  
+  .btn-danger {
+    @apply bg-red-600 text-white px-4 py-2 rounded-lg font-medium hover:bg-red-700 transition-colors;
+  }
+  
+  .input {
+    @apply w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent;
+  }
+  
+  .label {
+    @apply block text-sm font-medium text-gray-700 mb-1;
+  }
+  
+  .badge {
+    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium;
+  }
+  
+  .badge-success {
+    @apply bg-emerald-100 text-emerald-800;
+  }
+  
+  .badge-warning {
+    @apply bg-amber-100 text-amber-800;
+  }
+  
+  .badge-danger {
+    @apply bg-red-100 text-red-800;
+  }
+  
+  .badge-info {
+    @apply bg-blue-100 text-blue-800;
+  }
+  
+  .table {
+    @apply w-full text-sm text-left;
+  }
+  
+  .table thead {
+    @apply text-xs text-gray-700 uppercase bg-gray-50;
+  }
+  
+  .table th {
+    @apply px-6 py-3;
+  }
+  
+  .table td {
+    @apply px-6 py-4;
+  }
+  
+  .table tbody tr {
+    @apply bg-white border-b;
+  }
+  
+  .table tbody tr:hover {
+    @apply bg-gray-50;
+  }
+  
+  .sidebar {
+    @apply fixed left-0 top-0 h-full bg-white border-r border-gray-200 z-40 transition-all duration-300;
+  }
+  
+  .sidebar-item {
+    @apply flex items-center gap-3 px-4 py-3 text-gray-600 hover:bg-primary-50 hover:text-primary-600 transition-colors rounded-lg mx-2;
+  }
+  
+  .sidebar-item.active {
+    @apply bg-primary-50 text-primary-600 font-medium;
+  }
+  
+  .stat-card {
+    @apply bg-white rounded-xl border border-gray-200 p-6;
+  }
+  
+  .stat-value {
+    @apply text-3xl font-bold text-gray-900;
+  }
+  
+  .stat-label {
+    @apply text-sm text-gray-500 mt-1;
+  }
+  
+  .stat-change {
+    @apply text-sm font-medium mt-2;
+  }
+  
+  .stat-change.positive {
+    @apply text-emerald-600;
+  }
+  
+  .stat-change.negative {
+    @apply text-red-600;
+  }
+}
+
+@layer utilities {
+  .scrollbar-thin {
+    scrollbar-width: thin;
+  }
+  
+  .scrollbar-thin::-webkit-scrollbar {
+    width: 6px;
+  }
+  
+  .scrollbar-thin::-webkit-scrollbar-track {
+    background: #f1f5f9;
+  }
+  
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 3px;
+  }
+  
+  .scrollbar-thin::-webkit-scrollbar-thumb:hover {
+    background: #94a3b8;
+  }
+}
