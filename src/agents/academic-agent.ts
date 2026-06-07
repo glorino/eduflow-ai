@@ -66,6 +66,7 @@ export class AcademicAgent extends BaseAgent {
     const student = await prisma.student.findUnique({
       where: { id: studentId },
       include: {
+        user: true,
         assessments: {
           where: { assessment: { termId } },
           include: { assessment: true },
