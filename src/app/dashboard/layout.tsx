@@ -1,89 +1,195 @@
 'use client';
 
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import { useState } from 'react';
+import { usePathname, useRouter } from 'next/navigation';
+import { useState, useEffect, useCallback } from 'react';
+import { cn } from '@/lib/utils';
 
-const navigation = [
-  { name: 'Dashboard', href: '/dashboard', icon: '📊' },
-  { name: 'Admissions', href: '/dashboard/admissions', icon: '📝' },
-  { name: 'Academics', href: '/dashboard/academics', icon: '📚' },
-  { name: 'CBT', href: '/dashboard/cbt', icon: '💻' },
-  { name: 'Attendance', href: '/dashboard/attendance', icon: '📋' },
-  { name: 'Finance', href: '/dashboard/finance', icon: '💰' },
-  { name: 'Library', href: '/dashboard/library', icon: '📖' },
-  { name: 'Hostel', href: '/dashboard/hostel', icon: '🏠' },
-  { name: 'Transport', href: '/dashboard/transport', icon: '🚌' },
-  { name: 'Inventory', href: '/dashboard/inventory', icon: '📦' },
-  { name: 'Students', href: '/dashboard/students', icon: '🎓' },
-  { name: 'Teachers', href: '/dashboard/teachers', icon: '👨‍🏫' },
-  { name: 'Parents', href: '/dashboard/parents', icon: '👨‍👩‍👧' },
-  { name: 'Alumni', href: '/dashboard/alumni', icon: '🏛️' },
-  { name: 'Reports', href: '/dashboard/reports', icon: '📈' },
-  { name: 'AI Agents', href: '/dashboard/ai-agents', icon: '🤖' },
-  { name: 'Settings', href: '/dashboard/settings', icon: '⚙️' },
+const navSections = [
+  {
+    label: 'Overview',
+    items: [
+      { name: 'Dashboard', href: '/dashboard', icon: '📊' },
+    ],
+  },
+  {
+    label: 'Management',
+    items: [
+      { name: 'Admissions', href: '/dashboard/admissions', icon: '📝', badge: '12' },
+      { name: 'Students', href: '/dashboard/students', icon: '🎓' },
+      { name: 'Teachers', href: '/dashboard/teachers', icon: '👩‍🏫' },
+      { name: 'Parents', href: '/dashboard/parents', icon: '👨‍👩‍👧' },
+    ],
+  },
+  {
+    label: 'Academic',
+    items: [
+      { name: 'Academics', href: '/dashboard/academics', icon: '📚' },
+      { name: 'CBT', href: '/dashboard/cbt', icon: '💻', badge: '3' },
+      { name: 'Attendance', href: '/dashboard/attendance', icon: '📋' },
+      { name: 'Reports', href: '/dashboard/reports', icon: '📈' },
+    ],
+  },
+  {
+    label: 'Operations',
+    items: [
+      { name: 'Finance', href: '/dashboard/finance', icon: '💰' },
+      { name: 'Library', href: '/dashboard/library', icon: '📖' },
+      { name: 'Hostel', href: '/dashboard/hostel', icon: '🏠' },
+      { name: 'Transport', href: '/dashboard/transport', icon: '🚌' },
+      { name: 'Inventory', href: '/dashboard/inventory', icon: '📦' },
+    ],
+  },
+  {
+    label: 'Intelligence',
+    items: [
+      { name: 'AI Agents', href: '/dashboard/ai-agents', icon: '🤖', badge: '10' },
+      { name: 'Alumni', href: '/dashboard/alumni', icon: '🏛️' },
+    ],
+  },
+  {
+    label: 'System',
+    items: [
+      { name: 'Settings', href: '/dashboard/settings', icon: '⚙️' },
+    ],
+  },
 ];
 
-export default function DashboardLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+const allNavItems = navSections.flatMap(s => s.items);
+
+export default function DashboardLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
-  const [sidebarOpen, setSidebarOpen] = useState(true);
+  const router = useRouter();
+  const [collapsed, setCollapsed] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [searchOpen, setSearchOpen] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const [notifications] = useState(3);
+
+  const handleSearch = useCallback((e: React.FormEvent) => {
+    e.preventDefault();
+    if (searchQuery.trim()) {
+      router.push(`/dashboard/search?q=${encodeURIComponent(searchQuery.trim())}`);
+      setSearchQuery('');
+      setSearchOpen(false);
+    }
+  }, [searchQuery, router]);
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+        e.preventDefault();
+        setSearchOpen(true);
+      }
+      if (e.key === 'Escape') setSearchOpen(false);
+    };
+    document.addEventListener('keydown', handleKeyDown);
+    return () => document.removeEventListener('keydown', handleKeyDown);
+  }, []);
+
+  const filteredItems = searchQuery
+    ? allNavItems.filter(i => i.name.toLowerCase().includes(searchQuery.toLowerCase()))
+    : [];
 
   return (
-    <div className="flex h-screen bg-gray-50">
+    <div className="flex h-screen bg-slate-50 overflow-hidden">
+      {/* Mobile Overlay */}
+      {mobileOpen && (
+        <div className="fixed inset-0 z-40 bg-black/50 lg:hidden" onClick={() => setMobileOpen(false)} />
+      )}
+
       {/* Sidebar */}
-      <aside className={`${sidebarOpen ? 'w-64' : 'w-20'} bg-white border-r border-gray-200 transition-all duration-300 flex flex-col`}>
+      <aside className={cn(
+        'fixed lg:static z-50 h-full bg-white border-r border-slate-200/80 flex flex-col transition-all duration-300',
+        collapsed ? 'w-[72px]' : 'w-[260px]',
+        mobileOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'
+      )}>
         {/* Logo */}
-        <div className="h-16 flex items-center justify-between px-4 border-b border-gray-200">
-          <div className="flex items-center gap-3">
-            <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
-              <span className="text-white font-bold">E</span>
+        <div className="h-16 flex items-center justify-between px-4 border-b border-slate-100">
+          <Link href="/dashboard" className="flex items-center gap-3 min-w-0">
+            <div className="w-9 h-9 bg-gradient-to-br from-blue-600 to-blue-700 rounded-xl flex items-center justify-center shadow-lg shadow-blue-500/20 flex-shrink-0">
+              <span className="text-white font-bold text-sm">E</span>
             </div>
-            {sidebarOpen && <span className="font-bold text-gray-900">EduFlow AI</span>}
-          </div>
+            {!collapsed && (
+              <span className="font-bold text-slate-900 tracking-tight whitespace-nowrap">EduFlow AI</span>
+            )}
+          </Link>
           <button
-            onClick={() => setSidebarOpen(!sidebarOpen)}
-            className="text-gray-400 hover:text-gray-600"
+            onClick={() => { setCollapsed(!collapsed); setMobileOpen(false); }}
+            className="hidden lg:flex w-7 h-7 items-center justify-center rounded-lg text-slate-400 hover:text-slate-600 hover:bg-slate-100 transition-colors"
           >
-            {sidebarOpen ? '◀' : '▶'}
+            {collapsed ? '→' : '←'}
           </button>
         </div>
 
+        {/* Search Trigger */}
+        {!collapsed && (
+          <div className="px-4 pt-4">
+            <button
+              onClick={() => setSearchOpen(true)}
+              className="w-full flex items-center gap-2 px-3 py-2 bg-slate-50 border border-slate-200/80 rounded-xl text-sm text-slate-400 hover:border-slate-300 hover:bg-slate-100 transition-all"
+            >
+              <span className="text-base">🔍</span>
+              <span className="flex-1 text-left">Search...</span>
+              <kbd className="hidden sm:inline-flex items-center px-1.5 py-0.5 text-xs font-medium text-slate-400 bg-white border border-slate-200 rounded">⌘K</kbd>
+            </button>
+          </div>
+        )}
+
         {/* Navigation */}
-        <nav className="flex-1 overflow-y-auto py-4">
-          {navigation.map((item) => {
-            const isActive = pathname === item.href || pathname?.startsWith(item.href + '/');
-            return (
-              <Link
-                key={item.name}
-                href={item.href}
-                className={`flex items-center gap-3 px-4 py-3 mx-2 rounded-lg transition-colors ${
-                  isActive
-                    ? 'bg-blue-50 text-blue-600 font-medium'
-                    : 'text-gray-600 hover:bg-gray-50'
-                }`}
-                title={item.name}
-              >
-                <span className="text-lg">{item.icon}</span>
-                {sidebarOpen && <span className="text-sm">{item.name}</span>}
-              </Link>
-            );
-          })}
+        <nav className="flex-1 overflow-y-auto py-4 px-3 scrollbar-thin">
+          {navSections.map((section) => (
+            <div key={section.label} className="mb-4">
+              {!collapsed && (
+                <div className="px-3 mb-2 text-xs font-semibold text-slate-400 uppercase tracking-wider">
+                  {section.label}
+                </div>
+              )}
+              <div className="space-y-0.5">
+                {section.items.map((item) => {
+                  const isActive = pathname === item.href || (item.href !== '/dashboard' && pathname?.startsWith(item.href));
+                  return (
+                    <Link
+                      key={item.name}
+                      href={item.href}
+                      onClick={() => setMobileOpen(false)}
+                      className={cn(
+                        'flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all duration-150',
+                        isActive
+                          ? 'bg-blue-50 text-blue-700 shadow-sm'
+                          : 'text-slate-600 hover:bg-slate-50 hover:text-slate-900'
+                      )}
+                      title={collapsed ? item.name : undefined}
+                    >
+                      <span className="text-lg flex-shrink-0 w-6 text-center">{item.icon}</span>
+                      {!collapsed && (
+                        <>
+                          <span className="flex-1 truncate">{item.name}</span>
+                          {'badge' in item && item.badge && (
+                            <span className="px-2 py-0.5 text-xs font-semibold bg-blue-100 text-blue-700 rounded-full">
+                              {item.badge}
+                            </span>
+                          )}
+                        </>
+                      )}
+                    </Link>
+                  );
+                })}
+              </div>
+            </div>
+          ))}
         </nav>
 
-        {/* User Info */}
-        <div className="p-4 border-t border-gray-200">
-          <div className="flex items-center gap-3">
-            <div className="w-8 h-8 bg-gray-300 rounded-full flex items-center justify-center">
-              <span className="text-sm font-medium text-gray-600">SA</span>
+        {/* User Profile */}
+        <div className={cn('border-t border-slate-100 p-4', collapsed && 'px-2')}>
+          <div className={cn('flex items-center gap-3', collapsed && 'justify-center')}>
+            <div className="w-9 h-9 bg-gradient-to-br from-violet-500 to-purple-600 rounded-full flex items-center justify-center text-white text-sm font-bold flex-shrink-0 shadow-sm">
+              SA
             </div>
-            {sidebarOpen && (
+            {!collapsed && (
               <div className="flex-1 min-w-0">
-                <div className="text-sm font-medium text-gray-900 truncate">Super Admin</div>
-                <div className="text-xs text-gray-500 truncate">admin@eduflow.ai</div>
+                <div className="text-sm font-semibold text-slate-900 truncate">Super Admin</div>
+                <div className="text-xs text-slate-500 truncate">admin@eduflow.ai</div>
               </div>
             )}
           </div>
@@ -91,39 +197,92 @@ export default function DashboardLayout({
       </aside>
 
       {/* Main Content */}
-      <div className="flex-1 flex flex-col overflow-hidden">
+      <div className="flex-1 flex flex-col min-w-0 overflow-hidden">
         {/* Top Header */}
-        <header className="h-16 bg-white border-b border-gray-200 flex items-center justify-between px-6">
+        <header className="h-16 bg-white/80 backdrop-blur-xl border-b border-slate-200/80 flex items-center justify-between px-6 flex-shrink-0">
           <div className="flex items-center gap-4">
-            <h1 className="text-lg font-semibold text-gray-900">
-              {navigation.find(n => pathname?.startsWith(n.href))?.name || 'Dashboard'}
+            <button
+              onClick={() => setMobileOpen(true)}
+              className="lg:hidden p-2 text-slate-400 hover:text-slate-600 hover:bg-slate-100 rounded-xl transition-colors"
+            >
+              ☰
+            </button>
+            <h1 className="text-lg font-bold text-slate-900 tracking-tight">
+              {allNavItems.find(n => pathname?.startsWith(n.href))?.name || 'Dashboard'}
             </h1>
           </div>
-          <div className="flex items-center gap-4">
-            <div className="relative">
-              <input
-                type="text"
-                placeholder="Search..."
-                className="w-64 px-4 py-2 bg-gray-100 border-0 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-              />
-            </div>
-            <button className="relative p-2 text-gray-400 hover:text-gray-600">
-              <span className="text-xl">🔔</span>
-              <span className="absolute -top-1 -right-1 w-4 h-4 bg-red-500 text-white text-xs rounded-full flex items-center justify-center">
-                3
-              </span>
+          <div className="flex items-center gap-2">
+            <button
+              onClick={() => setSearchOpen(true)}
+              className="hidden md:flex items-center gap-2 px-3 py-2 bg-slate-50 border border-slate-200/80 rounded-xl text-sm text-slate-400 hover:border-slate-300 transition-all"
+            >
+              🔍
             </button>
-            <div className="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center">
-              <span className="text-white text-sm font-medium">SA</span>
+            <button className="relative p-2.5 text-slate-400 hover:text-slate-600 hover:bg-slate-100 rounded-xl transition-colors">
+              🔔
+              {notifications > 0 && (
+                <span className="absolute top-1.5 right-1.5 w-4 h-4 bg-rose-500 text-white text-[10px] font-bold rounded-full flex items-center justify-center shadow-sm">
+                  {notifications}
+                </span>
+              )}
+            </button>
+            <div className="w-9 h-9 bg-gradient-to-br from-violet-500 to-purple-600 rounded-full flex items-center justify-center text-white text-sm font-bold shadow-sm cursor-pointer hover:shadow-md transition-shadow">
+              SA
             </div>
           </div>
         </header>
 
         {/* Page Content */}
-        <main className="flex-1 overflow-y-auto p-6">
+        <main className="flex-1 overflow-y-auto p-6 lg:p-8">
           {children}
         </main>
       </div>
+
+      {/* Search Modal */}
+      {searchOpen && (
+        <div className="fixed inset-0 z-[100] flex items-start justify-center pt-[20vh]">
+          <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" onClick={() => setSearchOpen(false)} />
+          <div className="relative w-full max-w-xl mx-4 bg-white rounded-2xl shadow-2xl border border-slate-200 overflow-hidden">
+            <form onSubmit={handleSearch} className="flex items-center gap-3 px-5 py-4 border-b border-slate-100">
+              <span className="text-slate-400 text-lg">🔍</span>
+              <input
+                type="text"
+                placeholder="Search modules, students, teachers..."
+                className="flex-1 bg-transparent text-lg text-slate-900 placeholder:text-slate-400 focus:outline-none"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                autoFocus
+              />
+              <kbd className="px-2 py-1 text-xs font-medium text-slate-400 bg-slate-100 border border-slate-200 rounded">ESC</kbd>
+            </form>
+            {filteredItems.length > 0 && (
+              <div className="py-2 max-h-64 overflow-y-auto">
+                {filteredItems.map((item) => (
+                  <Link
+                    key={item.name}
+                    href={item.href}
+                    onClick={() => setSearchOpen(false)}
+                    className="flex items-center gap-3 px-5 py-3 hover:bg-blue-50 transition-colors"
+                  >
+                    <span className="text-lg">{item.icon}</span>
+                    <span className="text-sm font-medium text-slate-700">{item.name}</span>
+                  </Link>
+                ))}
+              </div>
+            )}
+            {searchQuery && filteredItems.length === 0 && (
+              <div className="py-8 text-center text-sm text-slate-500">
+                No results for &ldquo;{searchQuery}&rdquo;
+              </div>
+            )}
+            {!searchQuery && (
+              <div className="py-6 text-center text-sm text-slate-400">
+                Type to search across all modules
+              </div>
+            )}
+          </div>
+        </div>
+      )}
     </div>
   );
 }
