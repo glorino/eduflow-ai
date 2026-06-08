@@ -7,6 +7,7 @@ const featureGroups = [
     tag: 'Intelligence',
     title: '10 AI Agents that never sleep',
     description: 'Our AI agents work 24/7 to automate your school operations. They learn from your data and get smarter over time.',
+    gradient: 'card-gradient-blue',
     features: [
       { icon: '📝', name: 'Admission Agent', desc: 'Reviews applications, scores candidates, and recommends admissions.' },
       { icon: '📚', name: 'Academic Agent', desc: 'Analyzes performance, predicts risks, generates report cards.' },
@@ -25,6 +26,7 @@ const featureGroups = [
     tag: 'Scale',
     title: 'Multi-Campus, Multi-Term, Multi-Session',
     description: 'Manage unlimited campuses, academic sessions, and terms from a single centralized dashboard.',
+    gradient: 'card-gradient-violet',
     illustration: 'multiCampus',
   },
   {
@@ -32,6 +34,7 @@ const featureGroups = [
     tag: 'Anywhere',
     title: 'Native mobile apps for everyone',
     description: 'Parents, students, and teachers each get their own mobile experience — attendance, CBT, messaging, and more on the go.',
+    gradient: 'card-gradient-amber',
     illustration: 'mobile',
   },
   {
@@ -39,6 +42,7 @@ const featureGroups = [
     tag: 'Security',
     title: 'Enterprise-grade security built in',
     description: 'SOC2-ready with role-based access control, audit logging, encryption at rest, and complete tenant isolation.',
+    gradient: 'card-gradient-emerald',
     securityFeatures: [
       { icon: '🔐', name: 'Role-Based Access', desc: 'Granular permissions for every user role.' },
       { icon: '📝', name: 'Audit Logging', desc: 'Every action tracked with full audit trail.' },
@@ -83,7 +87,7 @@ export default function FeaturesPage() {
                 {group.features && (
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     {group.features.map(f => (
-                      <div key={f.name} className="flex items-start gap-3 p-3 rounded-xl hover:bg-white hover:shadow-sm transition-all">
+                      <div key={f.name} className="flex items-start gap-3 p-3 rounded-xl bg-white border border-slate-100 hover:shadow-md hover:border-slate-200 transition-all duration-200">
                         <span className="text-xl mt-0.5">{f.icon}</span>
                         <div>
                           <div className="text-sm font-bold text-slate-900">{f.name}</div>
@@ -97,7 +101,7 @@ export default function FeaturesPage() {
                 {group.securityFeatures && (
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     {group.securityFeatures.map(f => (
-                      <div key={f.name} className="flex items-start gap-3 p-3 rounded-xl hover:bg-white hover:shadow-sm transition-all">
+                      <div key={f.name} className="flex items-start gap-3 p-3 rounded-xl bg-white border border-slate-100 hover:shadow-md hover:border-slate-200 transition-all duration-200">
                         <span className="text-xl mt-0.5">{f.icon}</span>
                         <div>
                           <div className="text-sm font-bold text-slate-900">{f.name}</div>
@@ -114,17 +118,21 @@ export default function FeaturesPage() {
                 {group.illustration === 'mobile' && <MobileAppIllustration className="w-full max-w-xs mx-auto h-auto" />}
                 {group.id === 'ai' && <AIBrainIllustration className="w-full max-w-md mx-auto h-auto" />}
                 {group.id === 'security' && (
-                  <div className="bg-gradient-to-br from-slate-900 to-slate-800 rounded-3xl p-10 text-white">
-                    <div className="text-5xl mb-4">🛡️</div>
-                    <h3 className="text-xl font-bold mb-2">Bank-Level Security</h3>
-                    <p className="text-white/60 text-sm mb-6">Your data is protected with the same security standards used by financial institutions.</p>
-                    <div className="space-y-3">
-                      {['AES-256 Encryption', 'SOC2 Compliant', 'GDPR Ready', 'Daily Backups', '99.9% Uptime SLA'].map(s => (
-                        <div key={s} className="flex items-center gap-2 text-sm text-white/80">
-                          <span className="w-5 h-5 rounded-full bg-emerald-500/20 flex items-center justify-center text-emerald-400 text-xs">✓</span>
-                          {s}
-                        </div>
-                      ))}
+                  <div className="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 rounded-3xl p-10 text-white relative overflow-hidden">
+                    <div className="absolute -top-16 -right-16 w-48 h-48 bg-emerald-500/10 rounded-full blur-3xl" />
+                    <div className="absolute -bottom-16 -left-16 w-48 h-48 bg-blue-500/10 rounded-full blur-3xl" />
+                    <div className="relative">
+                      <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-emerald-500 to-teal-500 flex items-center justify-center text-3xl mb-6 shadow-2xl shadow-emerald-500/30">🛡️</div>
+                      <h3 className="text-xl font-bold mb-2">Bank-Level Security</h3>
+                      <p className="text-white/60 text-sm mb-6">Your data is protected with the same security standards used by financial institutions.</p>
+                      <div className="space-y-3">
+                        {['AES-256 Encryption', 'SOC2 Compliant', 'GDPR Ready', 'Daily Backups', '99.9% Uptime SLA'].map(s => (
+                          <div key={s} className="flex items-center gap-2.5 text-sm text-white/80">
+                            <span className="w-5 h-5 rounded-full bg-emerald-500/20 flex items-center justify-center text-emerald-400 text-xs">✓</span>
+                            {s}
+                          </div>
+                        ))}
+                      </div>
                     </div>
                   </div>
                 )}
@@ -137,11 +145,16 @@ export default function FeaturesPage() {
       {/* CTA */}
       <section className="py-24">
         <div className="max-w-7xl mx-auto px-6 lg:px-8 text-center">
-          <h2 className="text-3xl lg:text-4xl font-extrabold text-slate-900 mb-5">Ready to see it in action?</h2>
-          <p className="text-slate-500 mb-8 max-w-lg mx-auto">Start your free 30-day trial or schedule a personalized demo.</p>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Link href="/register" className="bg-gradient-to-r from-blue-600 to-blue-700 text-white px-8 py-4 rounded-2xl font-bold text-lg shadow-xl shadow-blue-500/25 hover:shadow-2xl transition-all">Start Free Trial →</Link>
-            <Link href="/contact" className="border border-slate-200 text-slate-700 px-8 py-4 rounded-2xl font-bold text-lg hover:bg-slate-50 transition-all">Schedule Demo</Link>
+          <div className="bg-gradient-to-r from-blue-600 via-violet-600 to-purple-700 rounded-[2rem] p-12 lg:p-16 text-white relative overflow-hidden">
+            <div className="absolute inset-0 mesh-bg opacity-10" />
+            <div className="relative">
+              <h2 className="text-3xl lg:text-4xl font-extrabold mb-5">Ready to see it in action?</h2>
+              <p className="text-lg text-white/70 mb-8 max-w-lg mx-auto">Start your free 30-day trial or schedule a personalized demo.</p>
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <Link href="/register" className="bg-white text-blue-700 px-8 py-4 rounded-2xl font-bold text-lg shadow-2xl hover:bg-blue-50 transition-all">Start Free Trial →</Link>
+                <Link href="/contact" className="border border-white/30 text-white px-8 py-4 rounded-2xl font-bold text-lg hover:bg-white/10 transition-all">Schedule Demo</Link>
+              </div>
+            </div>
           </div>
         </div>
       </section>

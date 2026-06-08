@@ -427,6 +427,12 @@ code, pre { font-family: 'JetBrains Mono', monospace; }
   .text-gradient-cool {
     @apply bg-clip-text text-transparent bg-gradient-to-r from-cyan-500 via-blue-500 to-violet-500;
   }
+  .text-gradient-emerald {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-emerald-500 via-teal-500 to-cyan-500;
+  }
+  .text-gradient-sunset {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-orange-500 via-rose-500 to-violet-500;
+  }
   .glass {
     @apply bg-white/70 backdrop-blur-xl border border-white/20;
   }
@@ -439,6 +445,18 @@ code, pre { font-family: 'JetBrains Mono', monospace; }
   .glow-blue-lg {
     box-shadow: var(--shadow-glow-lg);
   }
+  .glow-violet {
+    box-shadow: 0 0 20px rgba(139, 92, 246, 0.15);
+  }
+  .glow-emerald {
+    box-shadow: 0 0 20px rgba(5, 150, 105, 0.15);
+  }
+  .glow-amber {
+    box-shadow: 0 0 20px rgba(217, 119, 6, 0.15);
+  }
+  .glow-rose {
+    box-shadow: 0 0 20px rgba(225, 29, 72, 0.15);
+  }
   .mesh-bg {
     background-image: var(--gradient-mesh);
   }
@@ -448,4 +466,145 @@ code, pre { font-family: 'JetBrains Mono', monospace; }
   .font-mono {
     font-family: 'JetBrains Mono', monospace;
   }
+
+  /* ---- Colorful Card Gradients ---- */
+  .card-gradient-blue {
+    @apply relative overflow-hidden rounded-2xl border-0;
+    background: linear-gradient(135deg, #3b82f6 0%, #6366f1 100%);
+    color: white;
+  }
+  .card-gradient-blue::before {
+    content: '';
+    @apply absolute -top-12 -right-12 w-40 h-40 rounded-full opacity-20;
+    background: radial-gradient(circle, white 0%, transparent 70%);
+  }
+  .card-gradient-violet {
+    @apply relative overflow-hidden rounded-2xl border-0;
+    background: linear-gradient(135deg, #8b5cf6 0%, #a855f7 50%, #c084fc 100%);
+    color: white;
+  }
+  .card-gradient-violet::before {
+    content: '';
+    @apply absolute -top-12 -right-12 w-40 h-40 rounded-full opacity-20;
+    background: radial-gradient(circle, white 0%, transparent 70%);
+  }
+  .card-gradient-emerald {
+    @apply relative overflow-hidden rounded-2xl border-0;
+    background: linear-gradient(135deg, #059669 0%, #10b981 50%, #34d399 100%);
+    color: white;
+  }
+  .card-gradient-emerald::before {
+    content: '';
+    @apply absolute -top-12 -right-12 w-40 h-40 rounded-full opacity-20;
+    background: radial-gradient(circle, white 0%, transparent 70%);
+  }
+  .card-gradient-amber {
+    @apply relative overflow-hidden rounded-2xl border-0;
+    background: linear-gradient(135deg, #d97706 0%, #f59e0b 50%, #fbbf24 100%);
+    color: white;
+  }
+  .card-gradient-amber::before {
+    content: '';
+    @apply absolute -top-12 -right-12 w-40 h-40 rounded-full opacity-20;
+    background: radial-gradient(circle, white 0%, transparent 70%);
+  }
+  .card-gradient-rose {
+    @apply relative overflow-hidden rounded-2xl border-0;
+    background: linear-gradient(135deg, #e11d48 0%, #f43f5e 50%, #fb7185 100%);
+    color: white;
+  }
+  .card-gradient-rose::before {
+    content: '';
+    @apply absolute -top-12 -right-12 w-40 h-40 rounded-full opacity-20;
+    background: radial-gradient(circle, white 0%, transparent 70%);
+  }
+  .card-gradient-cyan {
+    @apply relative overflow-hidden rounded-2xl border-0;
+    background: linear-gradient(135deg, #0891b2 0%, #06b6d4 50%, #22d3ee 100%);
+    color: white;
+  }
+  .card-gradient-cyan::before {
+    content: '';
+    @apply absolute -top-12 -right-12 w-40 h-40 rounded-full opacity-20;
+    background: radial-gradient(circle, white 0%, transparent 70%);
+  }
+  .card-gradient-sunset {
+    @apply relative overflow-hidden rounded-2xl border-0;
+    background: linear-gradient(135deg, #f97316 0%, #ef4444 50%, #ec4899 100%);
+    color: white;
+  }
+  .card-gradient-sunset::before {
+    content: '';
+    @apply absolute -top-12 -right-12 w-40 h-40 rounded-full opacity-20;
+    background: radial-gradient(circle, white 0%, transparent 70%);
+  }
+  .card-gradient-ocean {
+    @apply relative overflow-hidden rounded-2xl border-0;
+    background: linear-gradient(135deg, #0ea5e9 0%, #6366f1 50%, #8b5cf6 100%);
+    color: white;
+  }
+  .card-gradient-ocean::before {
+    content: '';
+    @apply absolute -top-12 -right-12 w-40 h-40 rounded-full opacity-20;
+    background: radial-gradient(circle, white 0%, transparent 70%);
+  }
+  .card-gradient-forest {
+    @apply relative overflow-hidden rounded-2xl border-0;
+    background: linear-gradient(135deg, #059669 0%, #0d9488 50%, #0891b2 100%);
+    color: white;
+  }
+  .card-gradient-forest::before {
+    content: '';
+    @apply absolute -top-12 -right-12 w-40 h-40 rounded-full opacity-20;
+    background: radial-gradient(circle, white 0%, transparent 70%);
+  }
+  .card-gradient-midnight {
+    @apply relative overflow-hidden rounded-2xl border-0;
+    background: linear-gradient(135deg, #1e293b 0%, #334155 50%, #475569 100%);
+    color: white;
+  }
+  .card-gradient-midnight::before {
+    content: '';
+    @apply absolute -top-12 -right-12 w-40 h-40 rounded-full opacity-10;
+    background: radial-gradient(circle, white 0%, transparent 70%);
+  }
+
+  /* ---- Colorful Hover Effects ---- */
+  .hover-lift {
+    @apply transition-all duration-300;
+  }
+  .hover-lift:hover {
+    @apply -translate-y-1;
+    box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.1);
+  }
+  .hover-glow-blue:hover {
+    box-shadow: 0 0 30px rgba(59, 130, 246, 0.2), 0 10px 20px -5px rgba(59, 130, 246, 0.15);
+  }
+  .hover-glow-violet:hover {
+    box-shadow: 0 0 30px rgba(139, 92, 246, 0.2), 0 10px 20px -5px rgba(139, 92, 246, 0.15);
+  }
+  .hover-glow-emerald:hover {
+    box-shadow: 0 0 30px rgba(5, 150, 105, 0.2), 0 10px 20px -5px rgba(5, 150, 105, 0.15);
+  }
+
+  /* ---- Gradient Border ---- */
+  .gradient-border {
+    @apply relative rounded-2xl bg-white;
+    border: 2px solid transparent;
+    background-clip: padding-box;
+  }
+  .gradient-border::before {
+    content: '';
+    @apply absolute -inset-[2px] rounded-2xl -z-10;
+    background: linear-gradient(135deg, #3b82f6, #8b5cf6, #ec4899, #f59e0b);
+    background-size: 300% 300%;
+    animation: gradientShift 6s ease infinite;
+  }
+
+  /* ---- Colorful Dot Indicators ---- */
+  .dot-blue { @apply w-2 h-2 rounded-full bg-blue-500; }
+  .dot-emerald { @apply w-2 h-2 rounded-full bg-emerald-500; }
+  .dot-amber { @apply w-2 h-2 rounded-full bg-amber-500; }
+  .dot-rose { @apply w-2 h-2 rounded-full bg-rose-500; }
+  .dot-violet { @apply w-2 h-2 rounded-full bg-violet-500; }
 }
