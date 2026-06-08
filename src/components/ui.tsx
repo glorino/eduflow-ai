@@ -6,7 +6,7 @@ import { forwardRef, type ButtonHTMLAttributes } from 'react';
 // ============================================================
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: 'primary' | 'secondary' | 'success' | 'danger' | 'warning' | 'ghost';
+  variant?: 'primary' | 'secondary' | 'success' | 'danger' | 'warning' | 'ghost' | 'glass';
   size?: 'sm' | 'md' | 'lg';
   loading?: boolean;
   icon?: React.ReactNode;
@@ -14,14 +14,15 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className, variant = 'primary', size = 'md', loading, icon, children, disabled, ...props }, ref) => {
-    const baseStyles = 'inline-flex items-center justify-center gap-2 font-medium rounded-xl transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed active:scale-[0.98]';
+    const baseStyles = 'inline-flex items-center justify-center gap-2 font-semibold rounded-xl transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed active:scale-[0.97]';
     const variants = {
-      primary: 'bg-gradient-to-r from-blue-600 to-blue-700 text-white shadow-lg shadow-blue-500/25 hover:shadow-xl hover:from-blue-700 hover:to-blue-800 focus:ring-blue-500',
-      secondary: 'bg-white text-slate-700 border border-slate-200 shadow-sm hover:bg-slate-50 hover:border-slate-300 focus:ring-slate-400',
+      primary: 'bg-gradient-to-r from-blue-600 to-blue-700 text-white shadow-lg shadow-blue-500/25 hover:shadow-xl hover:shadow-blue-500/30 hover:from-blue-700 hover:to-blue-800 focus:ring-blue-500',
+      secondary: 'bg-white text-slate-700 border border-slate-200 shadow-sm hover:bg-slate-50 hover:border-slate-300 hover:shadow-md focus:ring-slate-400',
       success: 'bg-gradient-to-r from-emerald-600 to-emerald-700 text-white shadow-lg shadow-emerald-500/25 hover:shadow-xl focus:ring-emerald-500',
       danger: 'bg-gradient-to-r from-rose-600 to-rose-700 text-white shadow-lg shadow-rose-500/25 hover:shadow-xl focus:ring-rose-500',
       warning: 'bg-gradient-to-r from-amber-500 to-amber-600 text-white shadow-lg shadow-amber-500/25 hover:shadow-xl focus:ring-amber-500',
-      ghost: 'text-slate-600 hover:bg-slate-100 focus:ring-slate-400',
+      ghost: 'text-slate-600 hover:bg-slate-100 hover:text-slate-900 focus:ring-slate-400',
+      glass: 'bg-white/10 backdrop-blur-xl border border-white/20 text-white hover:bg-white/20',
     };
     const sizes = {
       sm: 'px-3 py-1.5 text-sm rounded-lg',
@@ -56,7 +57,7 @@ Button.displayName = 'Button';
 // ============================================================
 
 interface BadgeProps {
-  variant?: 'blue' | 'green' | 'amber' | 'red' | 'violet' | 'slate';
+  variant?: 'blue' | 'green' | 'amber' | 'red' | 'violet' | 'slate' | 'cyan';
   solid?: boolean;
   dot?: boolean;
   children: React.ReactNode;
@@ -66,21 +67,17 @@ interface BadgeProps {
 export function Badge({ variant = 'blue', solid, dot, children, className }: BadgeProps) {
   const baseStyles = 'inline-flex items-center gap-1.5 px-2.5 py-1 text-xs font-semibold rounded-full';
   const variants = {
-    blue: solid ? 'bg-blue-600 text-white' : 'bg-blue-50 text-blue-700 ring-1 ring-blue-600/10',
-    green: solid ? 'bg-emerald-600 text-white' : 'bg-emerald-50 text-emerald-700 ring-1 ring-emerald-600/10',
-    amber: solid ? 'bg-amber-500 text-white' : 'bg-amber-50 text-amber-700 ring-1 ring-amber-600/10',
-    red: solid ? 'bg-rose-600 text-white' : 'bg-rose-50 text-rose-700 ring-1 ring-rose-600/10',
-    violet: solid ? 'bg-violet-600 text-white' : 'bg-violet-50 text-violet-700 ring-1 ring-violet-600/10',
+    blue: solid ? 'bg-blue-600 text-white shadow-sm shadow-blue-500/20' : 'bg-blue-50 text-blue-700 ring-1 ring-blue-600/10',
+    green: solid ? 'bg-emerald-600 text-white shadow-sm shadow-emerald-500/20' : 'bg-emerald-50 text-emerald-700 ring-1 ring-emerald-600/10',
+    amber: solid ? 'bg-amber-500 text-white shadow-sm shadow-amber-500/20' : 'bg-amber-50 text-amber-700 ring-1 ring-amber-600/10',
+    red: solid ? 'bg-rose-600 text-white shadow-sm shadow-rose-500/20' : 'bg-rose-50 text-rose-700 ring-1 ring-rose-600/10',
+    violet: solid ? 'bg-violet-600 text-white shadow-sm shadow-violet-500/20' : 'bg-violet-50 text-violet-700 ring-1 ring-violet-600/10',
     slate: solid ? 'bg-slate-600 text-white' : 'bg-slate-100 text-slate-600 ring-1 ring-slate-500/10',
+    cyan: solid ? 'bg-cyan-600 text-white shadow-sm shadow-cyan-500/20' : 'bg-cyan-50 text-cyan-700 ring-1 ring-cyan-600/10',
   };
-
   const dotColors = {
-    blue: 'bg-blue-500',
-    green: 'bg-emerald-500',
-    amber: 'bg-amber-500',
-    red: 'bg-rose-500',
-    violet: 'bg-violet-500',
-    slate: 'bg-slate-500',
+    blue: 'bg-blue-500', green: 'bg-emerald-500', amber: 'bg-amber-500',
+    red: 'bg-rose-500', violet: 'bg-violet-500', slate: 'bg-slate-500', cyan: 'bg-cyan-500',
   };
 
   return (
@@ -98,23 +95,26 @@ export function Badge({ variant = 'blue', solid, dot, children, className }: Bad
 interface AvatarProps {
   name: string;
   src?: string;
-  size?: 'sm' | 'md' | 'lg' | 'xl';
-  color?: 'blue' | 'green' | 'amber' | 'violet';
+  size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+  color?: 'blue' | 'green' | 'amber' | 'violet' | 'rose' | 'cyan';
   className?: string;
 }
 
-const colorMap = {
-  blue: 'bg-blue-100 text-blue-700',
-  green: 'bg-emerald-100 text-emerald-700',
-  amber: 'bg-amber-100 text-amber-700',
-  violet: 'bg-violet-100 text-violet-700',
+const avatarGradients = {
+  blue: 'bg-gradient-to-br from-blue-500 to-blue-600',
+  green: 'bg-gradient-to-br from-emerald-500 to-emerald-600',
+  amber: 'bg-gradient-to-br from-amber-400 to-amber-500',
+  violet: 'bg-gradient-to-br from-violet-500 to-purple-600',
+  rose: 'bg-gradient-to-br from-rose-500 to-pink-500',
+  cyan: 'bg-gradient-to-br from-cyan-500 to-blue-500',
 };
 
 const sizeMap = {
-  sm: 'w-8 h-8 text-xs',
-  md: 'w-10 h-10 text-sm',
-  lg: 'w-12 h-12 text-base',
-  xl: 'w-16 h-16 text-lg',
+  xs: 'w-6 h-6 text-[9px]',
+  sm: 'w-8 h-8 text-[10px]',
+  md: 'w-10 h-10 text-xs',
+  lg: 'w-12 h-12 text-sm',
+  xl: 'w-16 h-16 text-base',
 };
 
 function getInitials(name: string) {
@@ -130,7 +130,7 @@ function getColorFromName(name: string): 'blue' | 'green' | 'amber' | 'violet' {
 export function Avatar({ name, src, size = 'md', color, className }: AvatarProps) {
   const resolvedColor = color || getColorFromName(name);
   return (
-    <div className={cn('inline-flex items-center justify-center rounded-full font-semibold relative', sizeMap[size], colorMap[resolvedColor], className)}>
+    <div className={cn('inline-flex items-center justify-center rounded-full font-bold text-white relative shadow-sm', sizeMap[size], avatarGradients[resolvedColor], className)}>
       {src ? (
         <img src={src} alt={name} className="w-full h-full rounded-full object-cover" />
       ) : (
@@ -149,16 +149,18 @@ interface CardProps {
   className?: string;
   elevated?: boolean;
   interactive?: boolean;
+  glow?: boolean;
   padding?: 'none' | 'sm' | 'md' | 'lg';
 }
 
-export function Card({ children, className, elevated, interactive, padding = 'md' }: CardProps) {
+export function Card({ children, className, elevated, interactive, glow, padding = 'md' }: CardProps) {
   const paddings = { none: '', sm: 'p-4', md: 'p-6', lg: 'p-8' };
   return (
     <div className={cn(
-      'bg-white rounded-2xl border transition-all duration-200',
+      'bg-white rounded-2xl border transition-all duration-300',
       elevated ? 'border-slate-200/50 shadow-lg shadow-slate-200/50' : 'border-slate-200/80 shadow-sm',
-      interactive && 'cursor-pointer hover:border-blue-200 hover:shadow-lg hover:shadow-blue-50',
+      interactive && 'cursor-pointer hover:border-blue-200 hover:shadow-lg hover:shadow-blue-50 hover:-translate-y-0.5',
+      glow && 'hover:shadow-blue-500/10 hover:shadow-xl',
       paddings[padding],
       className
     )}>
@@ -177,51 +179,46 @@ interface StatCardProps {
   change?: string;
   changeType?: 'positive' | 'negative' | 'neutral';
   icon: string;
-  color?: 'blue' | 'green' | 'amber' | 'rose' | 'violet';
+  color?: 'blue' | 'green' | 'amber' | 'rose' | 'violet' | 'cyan';
   subtitle?: string;
+  className?: string;
 }
 
-export function StatCard({ title, value, change, changeType = 'positive', icon, color = 'blue', subtitle }: StatCardProps) {
-  const bgColors = {
-    blue: 'bg-blue-50',
-    green: 'bg-emerald-50',
-    amber: 'bg-amber-50',
-    rose: 'bg-rose-50',
-    violet: 'bg-violet-50',
-  };
-  const iconColors = {
-    blue: 'text-blue-600',
-    green: 'text-emerald-600',
-    amber: 'text-amber-600',
-    rose: 'text-rose-600',
-    violet: 'text-violet-600',
-  };
+const statGradients = {
+  blue: 'from-blue-500 to-blue-600',
+  green: 'from-emerald-500 to-emerald-600',
+  amber: 'from-amber-400 to-amber-500',
+  rose: 'from-rose-500 to-rose-600',
+  violet: 'from-violet-500 to-purple-600',
+  cyan: 'from-cyan-500 to-blue-500',
+};
+
+export function StatCard({ title, value, change, changeType = 'positive', icon, color = 'blue', subtitle, className }: StatCardProps) {
   const changeColors = {
-    positive: 'text-emerald-600',
-    negative: 'text-rose-600',
-    neutral: 'text-slate-500',
+    positive: 'text-emerald-600 bg-emerald-50',
+    negative: 'text-rose-600 bg-rose-50',
+    neutral: 'text-slate-500 bg-slate-50',
   };
 
   return (
-    <div className={cn('card p-6 relative overflow-hidden group', `stat-card ${color}`)}>
-      <div className="flex items-start justify-between">
-        <div className="flex-1 min-w-0">
-          <p className="text-sm font-medium text-slate-500 truncate">{title}</p>
-          <p className="text-3xl font-bold text-slate-900 mt-1.5 tracking-tight">{value}</p>
-          {subtitle && <p className="text-xs text-slate-400 mt-1">{subtitle}</p>}
-          {change && (
-            <div className="flex items-center gap-1.5 mt-2">
-              <span className={cn('text-sm font-semibold', changeColors[changeType])}>
-                {changeType === 'positive' ? '↑' : changeType === 'negative' ? '↓' : '→'} {change}
-              </span>
-              <span className="text-xs text-slate-400">vs last month</span>
-            </div>
-          )}
-        </div>
-        <div className={cn('flex-shrink-0 w-12 h-12 rounded-xl flex items-center justify-center text-xl transition-transform group-hover:scale-110', bgColors[color], iconColors[color])}>
+    <div className={cn('bg-white rounded-2xl border border-slate-200/60 p-6 relative overflow-hidden group hover:shadow-lg hover:shadow-slate-200/50 transition-all duration-300 hover:-translate-y-0.5', className)}>
+      <div className="absolute top-0 right-0 w-24 h-24 rounded-full opacity-[0.07] -translate-y-1/3 translate-x-1/3 group-hover:scale-150 group-hover:opacity-[0.12] transition-all duration-500" style={{ background: `linear-gradient(135deg, ${color === 'blue' ? '#3b82f6' : color === 'green' ? '#059669' : color === 'amber' ? '#d97706' : color === 'rose' ? '#e11d48' : color === 'cyan' ? '#0891b2' : '#7c3aed'}, transparent)` }} />
+      <div className="flex items-start justify-between mb-4">
+        <span className="text-[11px] font-bold text-slate-400 uppercase tracking-widest">{title}</span>
+        <div className={`w-10 h-10 rounded-xl bg-gradient-to-br ${statGradients[color]} flex items-center justify-center text-lg shadow-sm group-hover:scale-110 transition-transform`}>
           {icon}
         </div>
       </div>
+      <div className="text-3xl font-extrabold text-slate-900 tracking-tight mb-1">{value}</div>
+      {change && (
+        <div className="flex items-center gap-2 mt-2">
+          <span className={cn('text-xs font-bold px-2 py-0.5 rounded-full', changeColors[changeType])}>
+            {changeType === 'positive' ? '↑' : changeType === 'negative' ? '↓' : '→'} {change}
+          </span>
+          <span className="text-[11px] text-slate-400">vs last month</span>
+        </div>
+      )}
+      {subtitle && <div className="text-[11px] text-slate-400 mt-1.5">{subtitle}</div>}
     </div>
   );
 }
@@ -250,20 +247,14 @@ interface TableProps<T> {
 }
 
 export function Table<T extends Record<string, unknown>>({
-  columns,
-  data,
-  onRowClick,
-  selectedRows,
-  onToggleRow,
-  rowKey,
-  emptyMessage = 'No data found',
-  emptyIcon = '📭',
+  columns, data, onRowClick, selectedRows, onToggleRow, rowKey,
+  emptyMessage = 'No data found', emptyIcon = '📭',
 }: TableProps<T>) {
   if (data.length === 0) {
     return (
-      <div className="empty-state">
-        <span className="text-5xl mb-4">{emptyIcon}</span>
-        <p className="text-lg font-medium text-slate-900 mb-1">{emptyMessage}</p>
+      <div className="empty-state py-16">
+        <div className="w-20 h-20 rounded-2xl bg-slate-100 flex items-center justify-center text-4xl mb-4">{emptyIcon}</div>
+        <p className="text-lg font-bold text-slate-900 mb-1">{emptyMessage}</p>
         <p className="text-sm text-slate-500">Try adjusting your search or filters</p>
       </div>
     );
@@ -273,22 +264,15 @@ export function Table<T extends Record<string, unknown>>({
     <div className="overflow-x-auto">
       <table className="w-full text-sm">
         <thead>
-          <tr className="bg-slate-50/80 border-b border-slate-200">
+          <tr className="bg-slate-50/80 border-b border-slate-200/80">
             {selectedRows && (
               <th className="px-5 py-3.5 w-12">
-                <input
-                  type="checkbox"
-                  className="w-4 h-4 rounded border-slate-300 text-blue-600 focus:ring-blue-500"
-                  onChange={() => {}}
-                />
+                <input type="checkbox" className="w-4 h-4 rounded border-slate-300 text-blue-600 focus:ring-blue-500" onChange={() => {}} />
               </th>
             )}
             {columns.map((col) => (
-              <th key={col.key} className={cn('px-5 py-3.5 text-left text-xs font-semibold text-slate-500 uppercase tracking-wider', col.className)}>
-                <span className={cn(col.sortable && 'cursor-pointer hover:text-slate-700 select-none')}>
-                  {col.header}
-                  {col.sortable && <span className="ml-1 text-slate-400">↕</span>}
-                </span>
+              <th key={col.key} className={cn('px-5 py-3.5 text-left text-[11px] font-bold text-slate-400 uppercase tracking-widest', col.className)}>
+                <span className={cn(col.sortable && 'cursor-pointer hover:text-slate-600 select-none')}>{col.header}{col.sortable && <span className="ml-1 text-slate-300">↕</span>}</span>
               </th>
             ))}
           </tr>
@@ -297,22 +281,12 @@ export function Table<T extends Record<string, unknown>>({
           {data.map((row, i) => (
             <tr
               key={String(row[rowKey])}
-              className={cn(
-                'border-b border-slate-100 last:border-0 transition-colors',
-                onRowClick && 'cursor-pointer hover:bg-blue-50/30',
-                selectedRows?.has(String(row[rowKey])) && 'bg-blue-50'
-              )}
+              className={cn('border-b border-slate-100/80 last:border-0 transition-colors duration-150', onRowClick && 'cursor-pointer hover:bg-blue-50/20', selectedRows?.has(String(row[rowKey])) && 'bg-blue-50/50')}
               onClick={() => onRowClick?.(row)}
-              style={{ animationDelay: `${i * 30}ms` }}
             >
               {selectedRows && (
                 <td className="px-5 py-4" onClick={(e) => e.stopPropagation()}>
-                  <input
-                    type="checkbox"
-                    className="w-4 h-4 rounded border-slate-300 text-blue-600 focus:ring-blue-500"
-                    checked={selectedRows.has(String(row[rowKey]))}
-                    onChange={() => onToggleRow?.(String(row[rowKey]))}
-                  />
+                  <input type="checkbox" className="w-4 h-4 rounded border-slate-300 text-blue-600 focus:ring-blue-500" checked={selectedRows.has(String(row[rowKey]))} onChange={() => onToggleRow?.(String(row[rowKey]))} />
                 </td>
               )}
               {columns.map((col) => (
@@ -356,14 +330,62 @@ export function ProgressBar({ value, max = 100, color = 'blue', size = 'md', sho
       {showLabel && (
         <div className="flex justify-between items-center mb-1.5">
           <span className="text-xs font-medium text-slate-600">{value}/{max}</span>
-          <span className="text-xs font-semibold text-slate-700">{Math.round(percentage)}%</span>
+          <span className="text-xs font-bold text-slate-700">{Math.round(percentage)}%</span>
         </div>
       )}
       <div className={cn('bg-slate-100 rounded-full overflow-hidden', heights[size])}>
-        <div
-          className={cn('h-full rounded-full transition-all duration-700 ease-out', barColors[color])}
-          style={{ width: `${percentage}%` }}
-        />
+        <div className={cn('h-full rounded-full transition-all duration-700 ease-out', barColors[color])} style={{ width: `${percentage}%` }} />
+      </div>
+    </div>
+  );
+}
+
+// ============================================================
+// Skeleton Component
+// ============================================================
+
+interface SkeletonProps {
+  className?: string;
+  count?: number;
+}
+
+export function Skeleton({ className, count = 1 }: SkeletonProps) {
+  return (
+    <>
+      {Array.from({ length: count }).map((_, i) => (
+        <div key={i} className={cn('skeleton', className)} />
+      ))}
+    </>
+  );
+}
+
+export function StatCardSkeleton() {
+  return (
+    <div className="bg-white rounded-2xl border border-slate-200/60 p-6">
+      <div className="flex items-start justify-between mb-4">
+        <Skeleton className="h-3 w-24 rounded-full" />
+        <Skeleton className="h-10 w-10 rounded-xl" />
+      </div>
+      <Skeleton className="h-8 w-32 rounded-lg mb-2" />
+      <Skeleton className="h-3 w-20 rounded-full" />
+    </div>
+  );
+}
+
+export function TableSkeleton({ rows = 5, cols = 4 }: { rows?: number; cols?: number }) {
+  return (
+    <div className="bg-white rounded-2xl border border-slate-200/60 overflow-hidden">
+      <div className="px-6 py-4 border-b border-slate-100">
+        <Skeleton className="h-5 w-40 rounded-lg" />
+      </div>
+      <div className="divide-y divide-slate-100">
+        {Array.from({ length: rows }).map((_, i) => (
+          <div key={i} className="px-6 py-4 flex items-center gap-4">
+            {Array.from({ length: cols }).map((_, j) => (
+              <Skeleton key={j} className="h-4 rounded-lg" style={{ width: j === 0 ? '120px' : j === 1 ? '80px' : '60px' }} />
+            ))}
+          </div>
+        ))}
       </div>
     </div>
   );
@@ -383,9 +405,9 @@ interface EmptyStateProps {
 export function EmptyState({ icon, title, description, action }: EmptyStateProps) {
   return (
     <div className="flex flex-col items-center justify-center py-16 px-8 text-center">
-      <span className="text-6xl mb-4">{icon}</span>
-      <h3 className="text-lg font-semibold text-slate-900 mb-2">{title}</h3>
-      <p className="text-sm text-slate-500 max-w-sm mb-6">{description}</p>
+      <div className="w-20 h-20 rounded-2xl bg-slate-100 flex items-center justify-center text-4xl mb-5">{icon}</div>
+      <h3 className="text-lg font-bold text-slate-900 mb-2">{title}</h3>
+      <p className="text-sm text-slate-500 max-w-sm mb-6 leading-relaxed">{description}</p>
       {action}
     </div>
   );
@@ -407,14 +429,14 @@ export function PageHeader({ title, subtitle, icon, actions, breadcrumbs }: Page
   return (
     <div className="mb-8">
       {breadcrumbs && breadcrumbs.length > 0 && (
-        <nav className="flex items-center gap-2 text-sm text-slate-500 mb-4">
+        <nav className="flex items-center gap-1.5 text-sm text-slate-400 mb-4">
           {breadcrumbs.map((crumb, i) => (
-            <span key={i} className="flex items-center gap-2">
+            <span key={i} className="flex items-center gap-1.5">
               {i > 0 && <span className="text-slate-300">/</span>}
               {crumb.href ? (
-                <a href={crumb.href} className="hover:text-slate-700 transition-colors">{crumb.label}</a>
+                <a href={crumb.href} className="hover:text-slate-600 transition-colors font-medium">{crumb.label}</a>
               ) : (
-                <span className="text-slate-700 font-medium">{crumb.label}</span>
+                <span className="text-slate-700 font-semibold">{crumb.label}</span>
               )}
             </span>
           ))}
@@ -424,12 +446,34 @@ export function PageHeader({ title, subtitle, icon, actions, breadcrumbs }: Page
         <div className="flex items-center gap-4">
           {icon && <span className="text-4xl">{icon}</span>}
           <div>
-            <h1 className="text-2xl font-bold text-slate-900 tracking-tight">{title}</h1>
+            <h1 className="text-2xl font-extrabold text-slate-900 tracking-tight">{title}</h1>
             {subtitle && <p className="text-sm text-slate-500 mt-1">{subtitle}</p>}
           </div>
         </div>
         {actions && <div className="flex items-center gap-3">{actions}</div>}
       </div>
+    </div>
+  );
+}
+
+// ============================================================
+// Section Header Component
+// ============================================================
+
+interface SectionHeaderProps {
+  title: string;
+  subtitle?: string;
+  action?: React.ReactNode;
+}
+
+export function SectionHeader({ title, subtitle, action }: SectionHeaderProps) {
+  return (
+    <div className="flex items-center justify-between mb-4">
+      <div>
+        <h3 className="text-base font-bold text-slate-900">{title}</h3>
+        {subtitle && <p className="text-xs text-slate-500 mt-0.5">{subtitle}</p>}
+      </div>
+      {action}
     </div>
   );
 }
