@@ -5,6 +5,14 @@ import { usePathname, useRouter } from 'next/navigation';
 import { useState, useEffect, useCallback } from 'react';
 import { cn } from '@/lib/utils';
 
+const personas = [
+  { id: 'admin', label: 'Super Admin', initials: 'SA', gradient: 'from-violet-500 via-purple-500 to-indigo-500', email: 'admin@eduflow.ai' },
+  { id: 'principal', label: 'Principal', initials: 'PJ', gradient: 'from-blue-500 to-blue-600', email: 'principal@school.edu' },
+  { id: 'teacher', label: 'Teacher', initials: 'TR', gradient: 'from-emerald-500 to-teal-500', email: 'teacher@school.edu' },
+  { id: 'parent', label: 'Parent', initials: 'PA', gradient: 'from-amber-500 to-orange-500', email: 'parent@email.com' },
+  { id: 'student', label: 'Student', initials: 'ST', gradient: 'from-rose-500 to-pink-500', email: 'student@school.edu' },
+];
+
 const navSections = [
   {
     label: 'Overview',
@@ -15,42 +23,42 @@ const navSections = [
   {
     label: 'Management',
     items: [
-      { name: 'Admissions', href: '/dashboard/admissions', icon: '📝', badge: '12' },
-      { name: 'Students', href: '/dashboard/students', icon: '🎓' },
-      { name: 'Teachers', href: '/dashboard/teachers', icon: '👩‍🏫' },
-      { name: 'Parents', href: '/dashboard/parents', icon: '👨‍👩‍👧' },
+      { name: 'Admissions', href: '/dashboard/admissions', icon: '📝', badge: '12', color: 'bg-blue-100 text-blue-700' },
+      { name: 'Students', href: '/dashboard/students', icon: '🎓', color: 'bg-violet-100 text-violet-700' },
+      { name: 'Teachers', href: '/dashboard/teachers', icon: '👩‍🏫', color: 'bg-emerald-100 text-emerald-700' },
+      { name: 'Parents', href: '/dashboard/parents', icon: '👨‍👩‍👧', color: 'bg-amber-100 text-amber-700' },
     ],
   },
   {
     label: 'Academic',
     items: [
-      { name: 'Academics', href: '/dashboard/academics', icon: '📚' },
-      { name: 'CBT', href: '/dashboard/cbt', icon: '💻', badge: '3' },
-      { name: 'Attendance', href: '/dashboard/attendance', icon: '📋' },
-      { name: 'Reports', href: '/dashboard/reports', icon: '📈' },
+      { name: 'Academics', href: '/dashboard/academics', icon: '📚', color: 'bg-indigo-100 text-indigo-700' },
+      { name: 'CBT', href: '/dashboard/cbt', icon: '💻', badge: '3', color: 'bg-cyan-100 text-cyan-700' },
+      { name: 'Attendance', href: '/dashboard/attendance', icon: '📋', color: 'bg-rose-100 text-rose-700' },
+      { name: 'Reports', href: '/dashboard/reports', icon: '📈', color: 'bg-teal-100 text-teal-700' },
     ],
   },
   {
     label: 'Operations',
     items: [
-      { name: 'Finance', href: '/dashboard/finance', icon: '💰' },
-      { name: 'Library', href: '/dashboard/library', icon: '📖' },
-      { name: 'Hostel', href: '/dashboard/hostel', icon: '🏠' },
-      { name: 'Transport', href: '/dashboard/transport', icon: '🚌' },
-      { name: 'Inventory', href: '/dashboard/inventory', icon: '📦' },
+      { name: 'Finance', href: '/dashboard/finance', icon: '💰', color: 'bg-emerald-100 text-emerald-700' },
+      { name: 'Library', href: '/dashboard/library', icon: '📖', color: 'bg-orange-100 text-orange-700' },
+      { name: 'Hostel', href: '/dashboard/hostel', icon: '🏠', color: 'bg-sky-100 text-sky-700' },
+      { name: 'Transport', href: '/dashboard/transport', icon: '🚌', color: 'bg-lime-100 text-lime-700' },
+      { name: 'Inventory', href: '/dashboard/inventory', icon: '📦', color: 'bg-pink-100 text-pink-700' },
     ],
   },
   {
     label: 'Intelligence',
     items: [
-      { name: 'AI Agents', href: '/dashboard/ai-agents', icon: '🤖', badge: '10' },
-      { name: 'Alumni', href: '/dashboard/alumni', icon: '🏛️' },
+      { name: 'AI Agents', href: '/dashboard/ai-agents', icon: '🤖', badge: '10', color: 'bg-violet-100 text-violet-700' },
+      { name: 'Alumni', href: '/dashboard/alumni', icon: '🏛️', color: 'bg-slate-100 text-slate-700' },
     ],
   },
   {
     label: 'System',
     items: [
-      { name: 'Settings', href: '/dashboard/settings', icon: '⚙️' },
+      { name: 'Settings', href: '/dashboard/settings', icon: '⚙️', color: 'bg-slate-100 text-slate-700' },
     ],
   },
 ];
@@ -66,6 +74,9 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
   const [mobileOpen, setMobileOpen] = useState(false);
   const [notifications] = useState(3);
   const [currentTime, setCurrentTime] = useState('');
+  const [personaOpen, setPersonaOpen] = useState(false);
+  const [activePersona, setActivePersona] = useState(personas[0]);
+  const [hoveredItem, setHoveredItem] = useState<string | null>(null);
 
   useEffect(() => {
     const updateTime = () => {
@@ -110,15 +121,15 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
 
       {/* Sidebar */}
       <aside className={cn(
-        'fixed lg:static z-50 h-full bg-white flex flex-col transition-all duration-300 ease-in-out',
-        collapsed ? 'w-[72px]' : 'w-[260px]',
+        'fixed lg:static z-50 h-full flex flex-col transition-all duration-300 ease-in-out',
+        collapsed ? 'w-[72px]' : 'w-[264px]',
         mobileOpen ? 'translate-x-0 shadow-2xl' : '-translate-x-full lg:translate-x-0',
-        'border-r border-slate-200/60'
+        'bg-white border-r border-slate-200/60'
       )}>
         {/* Logo */}
-        <div className="h-16 flex items-center justify-between px-4 border-b border-slate-100">
+        <div className="h-16 flex items-center justify-between px-4 border-b border-slate-100 flex-shrink-0">
           <Link href="/dashboard" className="flex items-center gap-3 min-w-0 group">
-            <div className="w-9 h-9 bg-gradient-to-br from-blue-600 via-blue-700 to-violet-600 rounded-xl flex items-center justify-center shadow-lg shadow-blue-500/20 flex-shrink-0 group-hover:shadow-blue-500/30 transition-shadow">
+            <div className="w-9 h-9 bg-gradient-to-br from-blue-600 via-blue-700 to-violet-600 rounded-xl flex items-center justify-center shadow-lg shadow-blue-500/20 flex-shrink-0 group-hover:shadow-blue-500/40 transition-all group-hover:scale-105">
               <span className="text-white font-bold text-sm">E</span>
             </div>
             {!collapsed && (
@@ -130,7 +141,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
           </Link>
           <button
             onClick={() => { setCollapsed(!collapsed); setMobileOpen(false); }}
-            className="hidden lg:flex w-7 h-7 items-center justify-center rounded-lg text-slate-400 hover:text-slate-600 hover:bg-slate-100 transition-colors"
+            className="hidden lg:flex w-7 h-7 items-center justify-center rounded-lg text-slate-400 hover:text-slate-600 hover:bg-slate-100 transition-all hover:scale-110"
           >
             {collapsed ? '→' : '←'}
           </button>
@@ -141,11 +152,11 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
           <div className="px-3 pt-3">
             <button
               onClick={() => setSearchOpen(true)}
-              className="w-full flex items-center gap-2.5 px-3 py-2 bg-slate-50 hover:bg-slate-100 border border-slate-200/60 rounded-xl text-sm text-slate-400 transition-all"
+              className="w-full flex items-center gap-2.5 px-3 py-2.5 bg-slate-50 hover:bg-slate-100 border border-slate-200/60 rounded-xl text-sm text-slate-400 transition-all hover:border-slate-300 hover:shadow-sm"
             >
               <span className="text-sm">🔍</span>
               <span className="flex-1 text-left text-xs">Search modules...</span>
-              <kbd className="hidden sm:inline-flex items-center px-1.5 py-0.5 text-[10px] font-medium text-slate-400 bg-white border border-slate-200 rounded">⌘K</kbd>
+              <kbd className="hidden sm:inline-flex items-center px-1.5 py-0.5 text-[10px] font-medium text-slate-400 bg-white border border-slate-200 rounded shadow-sm">⌘K</kbd>
             </button>
           </div>
         )}
@@ -167,20 +178,26 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
                       key={item.name}
                       href={item.href}
                       onClick={() => setMobileOpen(false)}
+                      onMouseEnter={() => setHoveredItem(item.name)}
+                      onMouseLeave={() => setHoveredItem(null)}
                       className={cn(
-                        'flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all duration-200',
+                        'flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 relative group',
                         isActive
-                          ? 'bg-blue-50/80 text-blue-700 shadow-sm shadow-blue-500/5'
+                          ? 'bg-gradient-to-r from-blue-50 to-violet-50 text-blue-700 shadow-sm shadow-blue-500/5 border border-blue-100/50'
                           : 'text-slate-600 hover:bg-slate-50 hover:text-slate-900'
                       )}
                       title={collapsed ? item.name : undefined}
                     >
-                      <span className="text-lg flex-shrink-0 w-6 text-center">{item.icon}</span>
+                      {isActive && <div className="absolute left-0 top-1/2 -translate-y-1/2 w-[3px] h-5 bg-gradient-to-b from-blue-500 to-violet-500 rounded-r-full" />}
+                      <span className={cn(
+                        'text-lg flex-shrink-0 w-6 text-center transition-transform',
+                        hoveredItem === item.name && !isActive && 'scale-110'
+                      )}>{item.icon}</span>
                       {!collapsed && (
                         <>
                           <span className="flex-1 truncate">{item.name}</span>
                           {'badge' in item && item.badge && (
-                            <span className="px-2 py-0.5 text-[10px] font-bold bg-blue-100 text-blue-700 rounded-full">
+                            <span className="px-2 py-0.5 text-[10px] font-bold bg-gradient-to-r from-blue-500 to-violet-500 text-white rounded-full shadow-sm">
                               {item.badge}
                             </span>
                           )}
@@ -194,16 +211,60 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
           ))}
         </nav>
 
-        {/* User Profile */}
-        <div className="border-t border-slate-100 p-3">
-          <div className={cn('flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-slate-50 transition-colors cursor-pointer', collapsed && 'justify-center px-0')}>
-            <div className="w-9 h-9 bg-gradient-to-br from-violet-500 via-purple-500 to-indigo-500 rounded-full flex items-center justify-center text-white text-xs font-bold flex-shrink-0 shadow-lg shadow-violet-500/20">
-              SA
-            </div>
-            {!collapsed && (
-              <div className="flex-1 min-w-0">
-                <div className="text-sm font-semibold text-slate-900 truncate">Super Admin</div>
-                <div className="text-[11px] text-slate-500 truncate">admin@eduflow.ai</div>
+        {/* User Profile + Persona Switcher */}
+        <div className="border-t border-slate-100 p-3 flex-shrink-0">
+          <div className="relative">
+            <button
+              onClick={() => setPersonaOpen(!personaOpen)}
+              className={cn(
+                'w-full flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-slate-50 transition-all',
+                collapsed && 'justify-center px-0',
+                personaOpen && 'bg-slate-50'
+              )}
+            >
+              <div className={cn(
+                'w-9 h-9 rounded-full flex items-center justify-center text-white text-xs font-bold flex-shrink-0 shadow-lg transition-all',
+                `bg-gradient-to-br ${activePersona.gradient}`,
+                'hover:scale-105'
+              )}>
+                {activePersona.initials}
+              </div>
+              {!collapsed && (
+                <div className="flex-1 min-w-0 text-left">
+                  <div className="text-sm font-semibold text-slate-900 truncate">{activePersona.label}</div>
+                  <div className="text-[11px] text-slate-500 truncate">{activePersona.email}</div>
+                </div>
+              )}
+              {!collapsed && (
+                <span className={cn('text-slate-400 text-xs transition-transform', personaOpen && 'rotate-180')}>▾</span>
+              )}
+            </button>
+
+            {/* Persona Dropdown */}
+            {personaOpen && (
+              <div className="absolute bottom-full left-0 right-0 mb-2 bg-white rounded-2xl border border-slate-200 shadow-2xl shadow-slate-200/50 overflow-hidden animate-fadeInUp z-50">
+                <div className="px-4 py-3 border-b border-slate-100">
+                  <div className="text-xs font-bold text-slate-400 uppercase tracking-wider">Switch Persona</div>
+                </div>
+                {personas.map((p) => (
+                  <button
+                    key={p.id}
+                    onClick={() => { setActivePersona(p); setPersonaOpen(false); }}
+                    className={cn(
+                      'w-full flex items-center gap-3 px-4 py-3 hover:bg-slate-50 transition-colors',
+                      activePersona.id === p.id && 'bg-blue-50/50'
+                    )}
+                  >
+                    <div className={cn('w-8 h-8 rounded-full flex items-center justify-center text-white text-[10px] font-bold', `bg-gradient-to-br ${p.gradient}`)}>
+                      {p.initials}
+                    </div>
+                    <div className="text-left">
+                      <div className="text-sm font-semibold text-slate-900">{p.label}</div>
+                      <div className="text-[11px] text-slate-500">{p.email}</div>
+                    </div>
+                    {activePersona.id === p.id && <span className="ml-auto text-blue-500 text-sm">✓</span>}
+                  </button>
+                ))}
               </div>
             )}
           </div>
@@ -226,27 +287,33 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
                 {allNavItems.find(n => pathname?.startsWith(n.href))?.name || 'Dashboard'}
               </h1>
               <p className="text-[11px] text-slate-400 font-medium hidden sm:block">
-                {currentTime && `${currentTime} • `}Welcome back, Admin
+                {currentTime && `${currentTime} • `}Welcome back, {activePersona.label}
               </p>
             </div>
           </div>
           <div className="flex items-center gap-2">
             <button
               onClick={() => setSearchOpen(true)}
-              className="hidden md:flex items-center gap-2 px-3 py-2 bg-slate-50 hover:bg-slate-100 border border-slate-200/60 rounded-xl text-sm text-slate-400 transition-all"
+              className="hidden md:flex items-center gap-2 px-3 py-2 bg-slate-50 hover:bg-slate-100 border border-slate-200/60 rounded-xl text-sm text-slate-400 transition-all hover:border-slate-300"
             >
               🔍
             </button>
+            <Link href="/dashboard" className="hidden md:flex items-center gap-2 px-3 py-2 bg-slate-50 hover:bg-slate-100 border border-slate-200/60 rounded-xl text-sm text-slate-600 font-medium transition-all hover:border-slate-300">
+              🏠 Home
+            </Link>
             <button className="relative p-2.5 text-slate-400 hover:text-slate-600 hover:bg-slate-100 rounded-xl transition-colors">
               🔔
               {notifications > 0 && (
-                <span className="absolute top-1.5 right-1.5 w-4 h-4 bg-rose-500 text-white text-[9px] font-bold rounded-full flex items-center justify-center shadow-sm animate-dotPulse">
+                <span className="absolute top-1.5 right-1.5 w-4 h-4 bg-gradient-to-r from-rose-500 to-pink-500 text-white text-[9px] font-bold rounded-full flex items-center justify-center shadow-sm animate-dotPulse">
                   {notifications}
                 </span>
               )}
             </button>
-            <div className="w-9 h-9 bg-gradient-to-br from-violet-500 via-purple-500 to-indigo-500 rounded-full flex items-center justify-center text-white text-sm font-bold shadow-lg shadow-violet-500/20 cursor-pointer hover:shadow-violet-500/30 transition-shadow">
-              SA
+            <div className={cn(
+              'w-9 h-9 rounded-full flex items-center justify-center text-white text-sm font-bold shadow-lg cursor-pointer hover:scale-105 transition-all',
+              `bg-gradient-to-br ${activePersona.gradient}`
+            )}>
+              {activePersona.initials}
             </div>
           </div>
         </header>

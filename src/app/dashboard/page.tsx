@@ -4,36 +4,36 @@ import Link from 'next/link';
 export const dynamic = 'force-dynamic';
 
 const agents = [
-  { name: 'Admission', icon: '📝', status: 'Active', tasks: 12, color: 'from-blue-500 to-blue-600' },
-  { name: 'Academic', icon: '📚', status: 'Active', tasks: 8, color: 'from-violet-500 to-violet-600' },
-  { name: 'Attendance', icon: '📋', status: 'Active', tasks: 15, color: 'from-emerald-500 to-emerald-600' },
-  { name: 'Finance', icon: '💰', status: 'Active', tasks: 6, color: 'from-amber-500 to-amber-600' },
-  { name: 'CBT', icon: '💻', status: 'Active', tasks: 3, color: 'from-cyan-500 to-cyan-600' },
-  { name: 'Parent Comms', icon: '👨‍👩‍👧', status: 'Active', tasks: 9, color: 'from-rose-500 to-rose-600' },
-  { name: 'Library', icon: '📖', status: 'Active', tasks: 4, color: 'from-indigo-500 to-indigo-600' },
-  { name: 'Discipline', icon: '⚖️', status: 'Active', tasks: 2, color: 'from-orange-500 to-orange-600' },
-  { name: 'Alumni', icon: '🏛️', status: 'Active', tasks: 1, color: 'from-teal-500 to-teal-600' },
-  { name: 'Reporting', icon: '📈', status: 'Active', tasks: 7, color: 'from-pink-500 to-pink-600' },
+  { name: 'Admission', icon: '📝', status: 'Active', tasks: 12, color: 'from-blue-500 to-blue-600', bg: 'bg-blue-50', border: 'border-blue-100' },
+  { name: 'Academic', icon: '📚', status: 'Active', tasks: 8, color: 'from-violet-500 to-violet-600', bg: 'bg-violet-50', border: 'border-violet-100' },
+  { name: 'Attendance', icon: '📋', status: 'Active', tasks: 15, color: 'from-emerald-500 to-emerald-600', bg: 'bg-emerald-50', border: 'border-emerald-100' },
+  { name: 'Finance', icon: '💰', status: 'Active', tasks: 6, color: 'from-amber-500 to-amber-600', bg: 'bg-amber-50', border: 'border-amber-100' },
+  { name: 'CBT', icon: '💻', status: 'Active', tasks: 3, color: 'from-cyan-500 to-cyan-600', bg: 'bg-cyan-50', border: 'border-cyan-100' },
+  { name: 'Parent Comms', icon: '👨‍👩‍👧', status: 'Active', tasks: 9, color: 'from-rose-500 to-rose-600', bg: 'bg-rose-50', border: 'border-rose-100' },
+  { name: 'Library', icon: '📖', status: 'Active', tasks: 4, color: 'from-indigo-500 to-indigo-600', bg: 'bg-indigo-50', border: 'border-indigo-100' },
+  { name: 'Discipline', icon: '⚖️', status: 'Active', tasks: 2, color: 'from-orange-500 to-orange-600', bg: 'bg-orange-50', border: 'border-orange-100' },
+  { name: 'Alumni', icon: '🏛️', status: 'Active', tasks: 1, color: 'from-teal-500 to-teal-600', bg: 'bg-teal-50', border: 'border-teal-100' },
+  { name: 'Reporting', icon: '📈', status: 'Active', tasks: 7, color: 'from-pink-500 to-pink-600', bg: 'bg-pink-50', border: 'border-pink-100' },
 ];
 
 const timelineItems = [
-  { icon: '📝', title: 'New admission application', desc: 'Emeka Okonkwo applied for SS1', time: '2 min ago', color: 'bg-blue-500' },
-  { icon: '🤖', title: 'AI completed review', desc: 'Admission Agent scored 92/100', time: '5 min ago', color: 'bg-violet-500' },
-  { icon: '💰', title: 'Payment received', desc: '₦125,000 from John Doe', time: '10 min ago', color: 'bg-emerald-500' },
-  { icon: '📋', title: 'Attendance marked', desc: 'Class SS2A — 28/30 present', time: '15 min ago', color: 'bg-amber-500' },
-  { icon: '📖', title: 'Book returned', desc: 'Sarah Smith returned book', time: '20 min ago', color: 'bg-indigo-500' },
-  { icon: '⚠️', title: 'Penalty alert', desc: '3 overdue books at Main Library', time: '25 min ago', color: 'bg-rose-500' },
+  { icon: '📝', title: 'New admission application', desc: 'Emeka Okonkwo applied for SS1', time: '2 min ago', color: 'bg-gradient-to-br from-blue-500 to-blue-600' },
+  { icon: '🤖', title: 'AI completed review', desc: 'Admission Agent scored 92/100', time: '5 min ago', color: 'bg-gradient-to-br from-violet-500 to-purple-600' },
+  { icon: '💰', title: 'Payment received', desc: '₦125,000 from John Doe', time: '10 min ago', color: 'bg-gradient-to-br from-emerald-500 to-teal-600' },
+  { icon: '📋', title: 'Attendance marked', desc: 'Class SS2A — 28/30 present', time: '15 min ago', color: 'bg-gradient-to-br from-amber-500 to-orange-500' },
+  { icon: '📖', title: 'Book returned', desc: 'Sarah Smith returned book', time: '20 min ago', color: 'bg-gradient-to-br from-indigo-500 to-blue-600' },
+  { icon: '⚠️', title: 'Penalty alert', desc: '3 overdue books at Main Library', time: '25 min ago', color: 'bg-gradient-to-br from-rose-500 to-pink-500' },
 ];
 
 const quickModules = [
-  { name: 'Admissions', icon: '📝', href: '/dashboard/admissions', bg: 'bg-blue-50', hover: 'hover:bg-blue-100', text: 'text-blue-600' },
-  { name: 'Academics', icon: '📚', href: '/dashboard/academics', bg: 'bg-violet-50', hover: 'hover:bg-violet-100', text: 'text-violet-600' },
-  { name: 'CBT', icon: '💻', href: '/dashboard/cbt', bg: 'bg-cyan-50', hover: 'hover:bg-cyan-100', text: 'text-cyan-600' },
-  { name: 'Attendance', icon: '📋', href: '/dashboard/attendance', bg: 'bg-amber-50', hover: 'hover:bg-amber-100', text: 'text-amber-600' },
-  { name: 'Finance', icon: '💰', href: '/dashboard/finance', bg: 'bg-emerald-50', hover: 'hover:bg-emerald-100', text: 'text-emerald-600' },
-  { name: 'Library', icon: '📖', href: '/dashboard/library', bg: 'bg-rose-50', hover: 'hover:bg-rose-100', text: 'text-rose-600' },
-  { name: 'Students', icon: '🎓', href: '/dashboard/students', bg: 'bg-indigo-50', hover: 'hover:bg-indigo-100', text: 'text-indigo-600' },
-  { name: 'Reports', icon: '📈', href: '/dashboard/reports', bg: 'bg-slate-50', hover: 'hover:bg-slate-100', text: 'text-slate-600' },
+  { name: 'Admissions', icon: '📝', href: '/dashboard/admissions', gradient: 'from-blue-500 to-blue-600' },
+  { name: 'Academics', icon: '📚', href: '/dashboard/academics', gradient: 'from-violet-500 to-purple-600' },
+  { name: 'CBT', icon: '💻', href: '/dashboard/cbt', gradient: 'from-cyan-500 to-blue-500' },
+  { name: 'Attendance', icon: '📋', href: '/dashboard/attendance', gradient: 'from-amber-500 to-orange-500' },
+  { name: 'Finance', icon: '💰', href: '/dashboard/finance', gradient: 'from-emerald-500 to-teal-600' },
+  { name: 'Library', icon: '📖', href: '/dashboard/library', gradient: 'from-rose-500 to-pink-500' },
+  { name: 'Students', icon: '🎓', href: '/dashboard/students', gradient: 'from-indigo-500 to-blue-600' },
+  { name: 'Reports', icon: '📈', href: '/dashboard/reports', gradient: 'from-teal-500 to-emerald-500' },
 ];
 
 export default async function DashboardPage() {
@@ -68,10 +68,10 @@ export default async function DashboardPage() {
   return (
     <div className="space-y-6">
       {/* Welcome Banner */}
-      <div className="relative bg-gradient-to-r from-blue-600 via-blue-700 to-violet-700 rounded-3xl p-8 text-white overflow-hidden animate-fadeInUp">
+      <div className="relative bg-gradient-to-r from-blue-600 via-violet-600 to-purple-700 rounded-3xl p-8 text-white overflow-hidden animate-fadeInUp">
         <div className="absolute inset-0 mesh-bg opacity-20" />
         <div className="absolute -top-20 -right-20 w-64 h-64 bg-white/5 rounded-full blur-3xl" />
-        <div className="absolute -bottom-10 -left-10 w-48 h-48 bg-white/5 rounded-full blur-3xl" />
+        <div className="absolute -bottom-10 -left-10 w-48 h-48 bg-emerald-400/10 rounded-full blur-3xl" />
         <div className="relative">
           <div className="flex items-center gap-2 mb-2">
             <span className="text-2xl">👋</span>
@@ -94,28 +94,35 @@ export default async function DashboardPage() {
         </div>
       </div>
 
-      {/* Stat Cards */}
+      {/* Stat Cards — Colorful */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
         {[
-          { title: 'Total Students', value: s.toLocaleString(), change: '+12.5%', positive: true, icon: '🎓', color: 'blue', subtitle: 'Active this term' },
-          { title: 'Total Teachers', value: t.toLocaleString(), change: '+5.2%', positive: true, icon: '👩‍🏫', color: 'green', subtitle: 'Across all campuses' },
-          { title: 'Pending Admissions', value: a.toLocaleString(), change: '-8.1%', positive: false, icon: '📝', color: 'amber', subtitle: 'Awaiting review' },
-          { title: 'Revenue (YTD)', value: `₦${(r / 1000000).toFixed(1)}M`, change: '+18.3%', positive: true, icon: '💰', color: 'violet', subtitle: 'Fees collected' },
+          { title: 'Total Students', value: s.toLocaleString(), change: '+12.5%', positive: true, icon: '🎓', gradient: 'from-blue-500 to-blue-600', lightBg: 'bg-blue-50', subtitle: 'Active this term' },
+          { title: 'Total Teachers', value: t.toLocaleString(), change: '+5.2%', positive: true, icon: '👩‍🏫', gradient: 'from-violet-500 to-purple-600', lightBg: 'bg-violet-50', subtitle: 'Across all campuses' },
+          { title: 'Pending Admissions', value: a.toLocaleString(), change: '-8.1%', positive: false, icon: '📝', gradient: 'from-amber-500 to-orange-500', lightBg: 'bg-amber-50', subtitle: 'Awaiting review' },
+          { title: 'Revenue (YTD)', value: `₦${(r / 1000000).toFixed(1)}M`, change: '+18.3%', positive: true, icon: '💰', gradient: 'from-emerald-500 to-teal-600', lightBg: 'bg-emerald-50', subtitle: 'Fees collected' },
         ].map((stat, i) => (
-          <div key={stat.title} className={`bg-white rounded-2xl border border-slate-200/60 p-6 relative overflow-hidden group hover:shadow-lg hover:shadow-slate-200/50 transition-all duration-300 animate-fadeInUp stagger-${i + 1}`}>
-            <div className="absolute top-0 right-0 w-20 h-20 rounded-full opacity-5 -translate-y-1/3 translate-x-1/3 group-hover:scale-150 group-hover:opacity-10 transition-all duration-500" style={{ backgroundColor: stat.color === 'blue' ? '#3b82f6' : stat.color === 'green' ? '#059669' : stat.color === 'amber' ? '#d97706' : '#7c3aed' }} />
-            <div className="flex items-start justify-between mb-3">
-              <span className="text-xs font-semibold text-slate-500 uppercase tracking-wider">{stat.title}</span>
-              <span className="text-2xl">{stat.icon}</span>
+          <div key={stat.title} className={`relative overflow-hidden rounded-2xl border border-slate-200/60 p-6 group hover:shadow-xl transition-all duration-300 animate-fadeInUp stagger-${i + 1} bg-white`}>
+            {/* Gradient accent top */}
+            <div className={`absolute top-0 left-0 right-0 h-1 bg-gradient-to-r ${stat.gradient}`} />
+            {/* Background glow */}
+            <div className={`absolute -top-12 -right-12 w-32 h-32 rounded-full opacity-10 ${stat.lightBg} group-hover:scale-150 transition-all duration-500`} />
+            <div className="relative">
+              <div className="flex items-start justify-between mb-3">
+                <span className="text-xs font-bold text-slate-400 uppercase tracking-wider">{stat.title}</span>
+                <div className={`w-10 h-10 rounded-xl bg-gradient-to-br ${stat.gradient} flex items-center justify-center text-lg shadow-lg group-hover:scale-110 transition-transform`}>
+                  {stat.icon}
+                </div>
+              </div>
+              <div className="text-3xl font-extrabold text-slate-900 tracking-tight mb-1">{stat.value}</div>
+              <div className="flex items-center gap-2">
+                <span className={`text-xs font-bold ${stat.positive ? 'text-emerald-600' : 'text-rose-600'}`}>
+                  {stat.positive ? '↑' : '↓'} {stat.change}
+                </span>
+                <span className="text-[11px] text-slate-400">vs last month</span>
+              </div>
+              <div className="text-[11px] text-slate-400 mt-1">{stat.subtitle}</div>
             </div>
-            <div className="text-3xl font-extrabold text-slate-900 tracking-tight mb-1">{stat.value}</div>
-            <div className="flex items-center gap-2">
-              <span className={`text-xs font-bold ${stat.positive ? 'text-emerald-600' : 'text-rose-600'}`}>
-                {stat.positive ? '↑' : '↓'} {stat.change}
-              </span>
-              <span className="text-[11px] text-slate-400">vs last month</span>
-            </div>
-            <div className="text-[11px] text-slate-400 mt-1">{stat.subtitle}</div>
           </div>
         ))}
       </div>
@@ -161,7 +168,12 @@ export default async function DashboardPage() {
             <div className="relative w-40 h-40">
               <svg width="160" height="160" className="-rotate-90">
                 <circle cx="80" cy="80" r="68" fill="none" stroke="#e2e8f0" strokeWidth="14" />
-                <circle cx="80" cy="80" r="68" fill="none" stroke="#059669" strokeWidth="14" strokeDasharray="427.3" strokeDashoffset={427.3 - (427.3 * 93 / 100)} strokeLinecap="round" className="transition-all duration-1000" />
+                <circle cx="80" cy="80" r="68" fill="none" stroke="url(#attendGrad)" strokeWidth="14" strokeDasharray="427.3" strokeDashoffset={427.3 - (427.3 * 93 / 100)} strokeLinecap="round" className="transition-all duration-1000" />
+                <defs>
+                  <linearGradient id="attendGrad" x1="0" y1="0" x2="160" y2="160">
+                    <stop stopColor="#10b981" /><stop offset="1" stopColor="#059669" />
+                  </linearGradient>
+                </defs>
               </svg>
               <div className="absolute inset-0 flex flex-col items-center justify-center">
                 <span className="text-3xl font-extrabold text-slate-900">93%</span>
@@ -177,22 +189,28 @@ export default async function DashboardPage() {
         </div>
       </div>
 
-      {/* Metric Cards */}
+      {/* Metric Cards — Colorful with sparklines */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
         {[
-          { title: 'CBT Exams Today', value: '3', sparkline: [2, 5, 3, 7, 4, 6, 3], change: '+2 vs yesterday', positive: true, color: '#3b82f6' },
-          { title: 'Fee Collections', value: '₦2.4M', sparkline: [1.8, 2.1, 1.9, 2.4, 2.2, 2.6, 2.4], change: '+12% vs last week', positive: true, color: '#059669' },
-          { title: 'Library Txns', value: '47', sparkline: [30, 42, 35, 50, 38, 45, 47], change: '+8% vs last week', positive: true, color: '#d97706' },
-          { title: 'Discipline', value: '2', sparkline: [5, 3, 4, 2, 3, 1, 2], change: '-40% vs last week', positive: false, color: '#e11d48' },
+          { title: 'CBT Exams Today', value: '3', sparkline: [2, 5, 3, 7, 4, 6, 3], change: '+2 vs yesterday', positive: true, gradient: 'from-cyan-500 to-blue-500', lightBg: 'bg-cyan-50' },
+          { title: 'Fee Collections', value: '₦2.4M', sparkline: [1.8, 2.1, 1.9, 2.4, 2.2, 2.6, 2.4], change: '+12% vs last week', positive: true, gradient: 'from-emerald-500 to-teal-500', lightBg: 'bg-emerald-50' },
+          { title: 'Library Txns', value: '47', sparkline: [30, 42, 35, 50, 38, 45, 47], change: '+8% vs last week', positive: true, gradient: 'from-amber-500 to-orange-500', lightBg: 'bg-amber-50' },
+          { title: 'Discipline', value: '2', sparkline: [5, 3, 4, 2, 3, 1, 2], change: '-40% vs last week', positive: false, gradient: 'from-rose-500 to-pink-500', lightBg: 'bg-rose-50' },
         ].map((m, i) => (
-          <div key={m.title} className={`bg-white rounded-2xl border border-slate-200/60 p-5 animate-fadeInUp stagger-${i + 1}`}>
+          <div key={m.title} className={`relative overflow-hidden rounded-2xl border border-slate-200/60 p-5 animate-fadeInUp stagger-${i + 1} bg-white`}>
+            <div className={`absolute top-0 left-0 right-0 h-1 bg-gradient-to-r ${m.gradient}`} />
             <div className="flex items-center justify-between mb-3">
-              <span className="text-xs font-semibold text-slate-500 uppercase tracking-wider">{m.title}</span>
+              <span className="text-xs font-bold text-slate-400 uppercase tracking-wider">{m.title}</span>
               <svg width="80" height="28" viewBox="0 0 80 28">
                 <polyline
                   points={m.sparkline.map((v, j) => `${(j / (m.sparkline.length - 1)) * 80},${28 - ((v / Math.max(...m.sparkline)) * 24) - 2}`).join(' ')}
-                  fill="none" stroke={m.color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
+                  fill="none" stroke={`url(#sparkGrad${i})`} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"
                 />
+                <defs>
+                  <linearGradient id={`sparkGrad${i}`} x1="0" y1="0" x2="80" y2="0" gradientUnits="userSpaceOnUse">
+                    <stop stopColor={['#06b6d4','#10b981','#f59e0b','#f43f5e'][i]} /><stop offset="1" stopColor={['#3b82f6','#0d9488','#f97316','#ec4899'][i]} />
+                  </linearGradient>
+                </defs>
               </svg>
             </div>
             <div className="text-2xl font-extrabold text-slate-900 tracking-tight">{m.value}</div>
@@ -203,8 +221,9 @@ export default async function DashboardPage() {
         ))}
       </div>
 
+      {/* AI Agents + Timeline */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        {/* AI Agents */}
+        {/* AI Agents — Colorful */}
         <div className="lg:col-span-2 bg-white rounded-2xl border border-slate-200/60 p-6 animate-fadeInUp stagger-5">
           <div className="flex items-center justify-between mb-5">
             <div>
@@ -215,7 +234,7 @@ export default async function DashboardPage() {
           </div>
           <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
             {agents.map((agent, i) => (
-              <div key={agent.name} className={`bg-slate-50/80 rounded-xl p-3.5 hover:bg-blue-50/50 hover:border-blue-200/50 border border-transparent transition-all duration-200 cursor-pointer group animate-fadeInUp stagger-${(i % 5) + 1}`}>
+              <div key={agent.name} className={`${agent.bg} ${agent.border} border rounded-xl p-3.5 hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 cursor-pointer group animate-fadeInUp stagger-${(i % 5) + 1}`}>
                 <div className={`w-10 h-10 rounded-xl bg-gradient-to-br ${agent.color} flex items-center justify-center text-lg mb-2.5 group-hover:scale-110 transition-transform shadow-sm`}>
                   {agent.icon}
                 </div>
@@ -230,16 +249,16 @@ export default async function DashboardPage() {
           </div>
         </div>
 
-        {/* Activity Timeline */}
+        {/* Activity Timeline — Colorful */}
         <div className="bg-white rounded-2xl border border-slate-200/60 p-6 animate-fadeInUp stagger-6">
           <h3 className="text-base font-bold text-slate-900 mb-5">Recent Activity</h3>
           <div className="space-y-0">
             {timelineItems.map((item, i) => (
               <div key={i} className="relative flex items-start gap-3 pb-5 last:pb-0">
                 {i < timelineItems.length - 1 && (
-                  <div className="absolute left-4 top-8 w-px h-full bg-slate-200" />
+                  <div className="absolute left-4 top-8 w-px h-full bg-gradient-to-b from-slate-200 to-transparent" />
                 )}
-                <div className={`w-8 h-8 rounded-full ${item.color} flex items-center justify-center text-sm flex-shrink-0 z-10 shadow-sm`}>
+                <div className={`w-8 h-8 rounded-full ${item.color} flex items-center justify-center text-sm flex-shrink-0 z-10 shadow-md`}>
                   {item.icon}
                 </div>
                 <div className="flex-1 min-w-0">
@@ -253,21 +272,23 @@ export default async function DashboardPage() {
         </div>
       </div>
 
-      {/* Quick Access */}
+      {/* Quick Access — Colorful Gradient Cards */}
       <div className="animate-fadeInUp stagger-7">
         <h3 className="text-base font-bold text-slate-900 mb-4">Quick Access</h3>
         <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-3">
           {quickModules.map((mod) => (
-            <Link key={mod.name} href={mod.href} className={`flex flex-col items-center gap-2.5 p-4 rounded-2xl border border-transparent ${mod.bg} ${mod.hover} transition-all duration-200 group`}>
-              <span className="text-2xl group-hover:scale-110 transition-transform">{mod.icon}</span>
-              <span className={`text-xs font-bold ${mod.text}`}>{mod.name}</span>
+            <Link key={mod.name} href={mod.href} className="group">
+              <div className={`flex flex-col items-center gap-2.5 p-4 rounded-2xl bg-gradient-to-br ${mod.gradient} text-white hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200`}>
+                <span className="text-2xl group-hover:scale-110 transition-transform">{mod.icon}</span>
+                <span className="text-xs font-bold">{mod.name}</span>
+              </div>
             </Link>
           ))}
         </div>
       </div>
 
       {!hasData && (
-        <div className="bg-amber-50 border border-amber-200 rounded-2xl p-4 flex items-center gap-3 animate-fadeInUp">
+        <div className="bg-gradient-to-r from-amber-50 to-orange-50 border border-amber-200/50 rounded-2xl p-4 flex items-center gap-3 animate-fadeInUp">
           <span className="text-xl">⚠️</span>
           <div className="text-sm">
             <span className="font-bold text-amber-800">Demo Mode</span> — Showing sample data. Database is connected and ready.
