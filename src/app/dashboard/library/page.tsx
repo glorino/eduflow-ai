@@ -102,7 +102,8 @@ export default function LibraryPage() {
 
       {/* Charts */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        <div className="lg:col-span-2 bg-white rounded-2xl border border-slate-200/80 p-6">
+        <div className="lg:col-span-2 relative overflow-hidden bg-white rounded-2xl border border-slate-200/80 p-6">
+          <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-rose-500 to-pink-600" />
           <h3 className="text-base font-bold text-slate-900 mb-1">Monthly Transactions</h3>
           <p className="text-sm text-slate-500 mb-6">Borrowing activity</p>
           <BarChart
@@ -113,7 +114,8 @@ export default function LibraryPage() {
             height={160}
           />
         </div>
-        <div className="bg-white rounded-2xl border border-slate-200/80 p-6">
+        <div className="relative overflow-hidden bg-white rounded-2xl border border-slate-200/80 p-6">
+          <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-rose-500 to-pink-600" />
           <h3 className="text-base font-bold text-slate-900 mb-5">By Category</h3>
           <div className="space-y-3">
             {[
@@ -151,7 +153,8 @@ export default function LibraryPage() {
         ))}
       </div>
 
-      <div className="bg-white rounded-2xl border border-slate-200/80 overflow-hidden">
+      <div className="relative overflow-hidden bg-white rounded-2xl border border-slate-200/80">
+        <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-rose-500 to-pink-600" />
         {activeTab === 'books' && <Table columns={bookColumns} data={mockBooks as unknown as Record<string, unknown>[]} rowKey="id" emptyIcon="📚" />}
         {activeTab === 'transactions' && <Table columns={txColumns} data={mockTransactions as unknown as Record<string, unknown>[]} rowKey="id" emptyIcon="🔄" />}
         {activeTab === 'penalties' && (

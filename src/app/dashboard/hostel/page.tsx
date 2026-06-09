@@ -58,12 +58,14 @@ export default function HostelPage() {
         <StatCard title="Full Blocks" value={mockHostels.filter(h => h.status === 'Full').length} icon="🔴" color="rose" />
       </div>
 
-      <div className="bg-white rounded-2xl border border-slate-200/80 overflow-hidden">
+      <div className="relative overflow-hidden bg-white rounded-2xl border border-slate-200/80">
+        <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-amber-500 to-orange-500" />
         <div className="px-6 py-4 border-b border-slate-100"><h3 className="text-base font-bold text-slate-900">Hostel Blocks</h3></div>
         <Table columns={hostelColumns} data={mockHostels as unknown as Record<string, unknown>[]} rowKey="id" emptyIcon="🏠" />
       </div>
 
-      <div className="bg-white rounded-2xl border border-slate-200/80 overflow-hidden">
+      <div className="relative overflow-hidden bg-white rounded-2xl border border-slate-200/80">
+        <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-orange-500 to-amber-500" />
         <div className="px-6 py-4 border-b border-slate-100"><h3 className="text-base font-bold text-slate-900">Room Overview</h3></div>
         <Table columns={roomColumns} data={mockRooms as unknown as Record<string, unknown>[]} rowKey="id" emptyIcon="🛏️" />
       </div>

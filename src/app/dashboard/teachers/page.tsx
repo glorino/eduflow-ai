@@ -128,7 +128,8 @@ export default function TeachersPage() {
       </div>
 
       {/* Table */}
-      <div className="bg-white rounded-2xl border border-slate-200/80 overflow-hidden">
+      <div className="relative overflow-hidden bg-white rounded-2xl border border-slate-200/80">
+        <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-violet-500 to-purple-600"></div>
         <Table
           columns={columns}
           data={filtered as unknown as Record<string, unknown>[]}
@@ -150,19 +151,19 @@ export default function TeachersPage() {
         {selectedTeacher && (
           <div className="space-y-6">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-              <div className="bg-slate-50 rounded-xl p-4">
+              <div className="bg-violet-50 rounded-xl p-4">
                 <div className="text-xs text-slate-500 mb-1">Department</div>
                 <div className="font-bold text-slate-900">{selectedTeacher.department}</div>
               </div>
-              <div className="bg-slate-50 rounded-xl p-4">
+              <div className="bg-violet-50 rounded-xl p-4">
                 <div className="text-xs text-slate-500 mb-1">Campus</div>
                 <div className="font-bold text-slate-900">{selectedTeacher.campus}</div>
               </div>
-              <div className="bg-slate-50 rounded-xl p-4">
+              <div className="bg-violet-50 rounded-xl p-4">
                 <div className="text-xs text-slate-500 mb-1">Classes</div>
                 <div className="font-bold text-slate-900">{selectedTeacher.classes}</div>
               </div>
-              <div className="bg-slate-50 rounded-xl p-4">
+              <div className="bg-violet-50 rounded-xl p-4">
                 <div className="text-xs text-slate-500 mb-1">Students</div>
                 <div className="font-bold text-slate-900">{selectedTeacher.students}</div>
               </div>

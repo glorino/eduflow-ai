@@ -126,7 +126,8 @@ export default function StudentsPage() {
       </div>
 
       {/* Table */}
-      <div className="bg-white rounded-2xl border border-slate-200/80 overflow-hidden">
+      <div className="relative overflow-hidden bg-white rounded-2xl border border-slate-200/80">
+        <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-500 to-blue-600"></div>
         <Table
           columns={columns}
           data={filtered as unknown as Record<string, unknown>[]}
@@ -148,19 +149,19 @@ export default function StudentsPage() {
         {selectedStudent && (
           <div className="space-y-6">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-              <div className="bg-slate-50 rounded-xl p-4">
+              <div className="bg-blue-50 rounded-xl p-4">
                 <div className="text-xs text-slate-500 mb-1">Class</div>
                 <div className="font-bold text-slate-900">{selectedStudent.class}</div>
               </div>
-              <div className="bg-slate-50 rounded-xl p-4">
+              <div className="bg-blue-50 rounded-xl p-4">
                 <div className="text-xs text-slate-500 mb-1">Campus</div>
                 <div className="font-bold text-slate-900">{selectedStudent.campus}</div>
               </div>
-              <div className="bg-slate-50 rounded-xl p-4">
+              <div className="bg-blue-50 rounded-xl p-4">
                 <div className="text-xs text-slate-500 mb-1">GPA</div>
                 <div className="font-bold text-slate-900">{selectedStudent.gpa.toFixed(1)}</div>
               </div>
-              <div className="bg-slate-50 rounded-xl p-4">
+              <div className="bg-blue-50 rounded-xl p-4">
                 <div className="text-xs text-slate-500 mb-1">Attendance</div>
                 <div className="font-bold text-slate-900">{selectedStudent.attendance}%</div>
               </div>

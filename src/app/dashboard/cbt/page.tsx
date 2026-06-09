@@ -78,7 +78,8 @@ export default function CBTPage() {
 
       {/* Charts */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        <div className="lg:col-span-2 bg-white rounded-2xl border border-slate-200/80 p-6">
+        <div className="lg:col-span-2 relative overflow-hidden bg-white rounded-2xl border border-slate-200/80 p-6">
+          <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-cyan-500 to-blue-600" />
           <h3 className="text-base font-bold text-slate-900 mb-1">Score Distribution</h3>
           <p className="text-sm text-slate-500 mb-6">Last exam results</p>
           <BarChart
@@ -92,7 +93,8 @@ export default function CBTPage() {
             height={180}
           />
         </div>
-        <div className="bg-white rounded-2xl border border-slate-200/80 p-6">
+        <div className="relative overflow-hidden bg-white rounded-2xl border border-slate-200/80 p-6">
+          <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-cyan-500 to-blue-600" />
           <h3 className="text-base font-bold text-slate-900 mb-1">Pass Rate</h3>
           <p className="text-sm text-slate-500 mb-6">Overall performance</p>
           <div className="flex justify-center">
@@ -102,11 +104,12 @@ export default function CBTPage() {
       </div>
 
       {/* Top Performers */}
-      <div className="bg-white rounded-2xl border border-slate-200/80 p-6">
+      <div className="relative overflow-hidden bg-white rounded-2xl border border-slate-200/80 p-6">
+        <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-cyan-500 to-blue-600" />
         <h3 className="text-base font-bold text-slate-900 mb-5">Top Performers</h3>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
           {mockResults.map((r, i) => (
-            <div key={i} className="bg-slate-50 rounded-xl p-4 text-center hover:bg-blue-50 transition-colors">
+            <div key={i} className="bg-cyan-50 rounded-xl p-4 text-center hover:bg-cyan-100 transition-colors">
               <div className="w-12 h-12 mx-auto rounded-full bg-gradient-to-br from-blue-500 to-violet-500 flex items-center justify-center text-white font-bold text-lg mb-3">
                 {r.student.split(' ').map(n => n[0]).join('').slice(0, 2)}
               </div>
@@ -123,7 +126,8 @@ export default function CBTPage() {
       </div>
 
       {/* Exam Table */}
-      <div className="bg-white rounded-2xl border border-slate-200/80 overflow-hidden">
+      <div className="relative overflow-hidden bg-white rounded-2xl border border-slate-200/80">
+        <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-cyan-500 to-blue-600" />
         <div className="px-6 py-4 border-b border-slate-100">
           <h3 className="text-base font-bold text-slate-900">All Exams</h3>
         </div>

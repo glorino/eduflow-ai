@@ -47,14 +47,15 @@ export default function AlumniPage() {
       </div>
 
       {/* WAEC Migration Queue */}
-      <div className="bg-white rounded-2xl border border-slate-200/80 p-6">
+      <div className="bg-white rounded-2xl border border-slate-200/80 relative overflow-hidden p-6">
+        <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-violet-500 to-purple-600" />
         <div className="flex items-center justify-between mb-5">
           <div><h3 className="text-base font-bold text-slate-900">WAEC Migration Queue</h3><p className="text-sm text-slate-500 mt-0.5">Students awaiting result migration</p></div>
           <Button size="sm" onClick={() => setToast({ message: 'WAEC migration started for 3 students', type: 'success' })}>Process All</Button>
         </div>
         <div className="space-y-3">
           {waecPending.map((w, i) => (
-            <div key={i} className="flex items-center justify-between p-4 bg-slate-50 rounded-xl">
+            <div key={i} className="flex items-center justify-between p-4 bg-violet-50 rounded-xl">
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 rounded-full bg-gradient-to-br from-amber-400 to-orange-500 flex items-center justify-center text-white text-sm font-bold">{w.name.split(' ').map(n => n[0]).join('')}</div>
                 <div><div className="font-semibold text-slate-900">{w.name}</div><div className="text-xs text-slate-500">Graduated {w.year}</div></div>
@@ -65,7 +66,8 @@ export default function AlumniPage() {
         </div>
       </div>
 
-      <div className="bg-white rounded-2xl border border-slate-200/80 overflow-hidden">
+      <div className="bg-white rounded-2xl border border-slate-200/80 relative overflow-hidden">
+        <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-violet-500 to-purple-600" />
         <div className="px-6 py-4 border-b border-slate-100"><h3 className="text-base font-bold text-slate-900">Alumni Directory</h3></div>
         <Table columns={columns} data={mockAlumni as unknown as Record<string, unknown>[]} rowKey="id" emptyIcon="🏛️" />
       </div>

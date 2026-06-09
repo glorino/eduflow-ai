@@ -11,12 +11,12 @@ export default function HomeScreen() {
 
       <View style={styles.grid}>
         {[
-          { name: 'Dashboard', icon: '📊', href: '/dashboard' },
-          { name: 'Attendance', icon: '📋', href: '/attendance' },
-          { name: 'CBT', icon: '💻', href: '/cbt' },
-          { name: 'Library', icon: '📖', href: '/library' },
-          { name: 'Finance', icon: '💰', href: '/finance' },
-          { name: 'Messages', icon: '💬', href: '/messages' },
+          { name: 'Dashboard', icon: '📊', href: '/(tabs)' },
+          { name: 'Attendance', icon: '📋', href: '/(tabs)' },
+          { name: 'CBT', icon: '💻', href: '/(tabs)' },
+          { name: 'Library', icon: '📖', href: '/(tabs)' },
+          { name: 'Finance', icon: '💰', href: '/(tabs)' },
+          { name: 'Messages', icon: '💬', href: '/(tabs)' },
         ].map((item) => (
           <Link key={item.name} href={item.href} asChild>
             <TouchableOpacity style={styles.gridItem}>

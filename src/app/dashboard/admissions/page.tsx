@@ -159,7 +159,8 @@ export default function AdmissionsPage() {
       </div>
 
       {/* Table */}
-      <div className="bg-white rounded-2xl border border-slate-200/80 overflow-hidden">
+      <div className="relative overflow-hidden bg-white rounded-2xl border border-slate-200/80">
+        <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-500 to-blue-600"></div>
         <Table
           columns={columns}
           data={filteredApps as unknown as Record<string, unknown>[]}

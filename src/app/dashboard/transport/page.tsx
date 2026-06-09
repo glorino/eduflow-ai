@@ -43,18 +43,19 @@ export default function TransportPage() {
         <StatCard title="Available Seats" value={totalCapacity - totalStudents} icon="💺" color="amber" />
       </div>
 
-      {/* Route Map Placeholder */}
-      <div className="bg-white rounded-2xl border border-slate-200/80 p-6">
+      <div className="relative overflow-hidden bg-white rounded-2xl border border-slate-200/80 p-6">
+        <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-indigo-500 to-violet-500" />
         <h3 className="text-base font-bold text-slate-900 mb-4">Live Route Tracking</h3>
-        <div className="bg-gradient-to-br from-slate-100 to-slate-50 rounded-xl h-64 flex items-center justify-center border border-dashed border-slate-300">
+        <div className="bg-gradient-to-br from-indigo-100 via-violet-50 to-purple-100 rounded-xl h-64 flex items-center justify-center border border-indigo-200/60">
           <div className="text-center">
             <span className="text-4xl">🗺️</span>
-            <p className="text-sm text-slate-500 mt-2">Real-time GPS tracking — Connect bus GPS devices to enable live tracking</p>
+            <p className="text-sm text-indigo-600 mt-2 font-medium">Real-time GPS tracking — Connect bus GPS devices to enable live tracking</p>
           </div>
         </div>
       </div>
 
-      <div className="bg-white rounded-2xl border border-slate-200/80 overflow-hidden">
+      <div className="relative overflow-hidden bg-white rounded-2xl border border-slate-200/80">
+        <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-violet-500 to-indigo-500" />
         <div className="px-6 py-4 border-b border-slate-100"><h3 className="text-base font-bold text-slate-900">All Routes</h3></div>
         <Table columns={columns} data={mockRoutes as unknown as Record<string, unknown>[]} rowKey="id" emptyIcon="🚌" />
       </div>

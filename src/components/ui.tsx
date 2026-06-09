@@ -193,6 +193,17 @@ const statGradients = {
   cyan: 'from-cyan-500 to-blue-500',
 };
 
+const statLightBgs = {
+  blue: 'bg-blue-50', green: 'bg-emerald-50', amber: 'bg-amber-50',
+  rose: 'bg-rose-50', violet: 'bg-violet-50', cyan: 'bg-cyan-50',
+};
+
+const statTopGradients = {
+  blue: 'from-blue-500 to-blue-600', green: 'from-emerald-500 to-emerald-600',
+  amber: 'from-amber-500 to-orange-500', rose: 'from-rose-500 to-pink-500',
+  violet: 'from-violet-500 to-purple-600', cyan: 'from-cyan-500 to-blue-500',
+};
+
 export function StatCard({ title, value, change, changeType = 'positive', icon, color = 'blue', subtitle, className }: StatCardProps) {
   const changeColors = {
     positive: 'text-emerald-600 bg-emerald-50',
@@ -201,24 +212,27 @@ export function StatCard({ title, value, change, changeType = 'positive', icon, 
   };
 
   return (
-    <div className={cn('bg-white rounded-2xl border border-slate-200/60 p-6 relative overflow-hidden group hover:shadow-lg hover:shadow-slate-200/50 transition-all duration-300 hover:-translate-y-0.5', className)}>
-      <div className="absolute top-0 right-0 w-24 h-24 rounded-full opacity-[0.07] -translate-y-1/3 translate-x-1/3 group-hover:scale-150 group-hover:opacity-[0.12] transition-all duration-500" style={{ background: `linear-gradient(135deg, ${color === 'blue' ? '#3b82f6' : color === 'green' ? '#059669' : color === 'amber' ? '#d97706' : color === 'rose' ? '#e11d48' : color === 'cyan' ? '#0891b2' : '#7c3aed'}, transparent)` }} />
-      <div className="flex items-start justify-between mb-4">
-        <span className="text-[11px] font-bold text-slate-400 uppercase tracking-widest">{title}</span>
-        <div className={`w-10 h-10 rounded-xl bg-gradient-to-br ${statGradients[color]} flex items-center justify-center text-lg shadow-sm group-hover:scale-110 transition-transform`}>
-          {icon}
+    <div className={cn('relative overflow-hidden rounded-2xl border border-slate-200/60 p-6 group hover:shadow-xl transition-all duration-300 hover:-translate-y-0.5 bg-white', className)}>
+      <div className={`absolute top-0 left-0 right-0 h-1 bg-gradient-to-r ${statTopGradients[color]}`} />
+      <div className={`absolute -top-12 -right-12 w-32 h-32 rounded-full opacity-10 ${statLightBgs[color]} group-hover:scale-150 transition-all duration-500`} />
+      <div className="relative">
+        <div className="flex items-start justify-between mb-3">
+          <span className="text-[11px] font-bold text-slate-400 uppercase tracking-widest">{title}</span>
+          <div className={`w-10 h-10 rounded-xl bg-gradient-to-br ${statGradients[color]} flex items-center justify-center text-lg shadow-lg group-hover:scale-110 transition-transform`}>
+            {icon}
+          </div>
         </div>
+        <div className="text-3xl font-extrabold text-slate-900 tracking-tight mb-1">{value}</div>
+        {change && (
+          <div className="flex items-center gap-2 mt-2">
+            <span className={cn('text-xs font-bold px-2 py-0.5 rounded-full', changeColors[changeType])}>
+              {changeType === 'positive' ? '↑' : changeType === 'negative' ? '↓' : '→'} {change}
+            </span>
+            <span className="text-[11px] text-slate-400">vs last month</span>
+          </div>
+        )}
+        {subtitle && <div className="text-[11px] text-slate-400 mt-1.5">{subtitle}</div>}
       </div>
-      <div className="text-3xl font-extrabold text-slate-900 tracking-tight mb-1">{value}</div>
-      {change && (
-        <div className="flex items-center gap-2 mt-2">
-          <span className={cn('text-xs font-bold px-2 py-0.5 rounded-full', changeColors[changeType])}>
-            {changeType === 'positive' ? '↑' : changeType === 'negative' ? '↓' : '→'} {change}
-          </span>
-          <span className="text-[11px] text-slate-400">vs last month</span>
-        </div>
-      )}
-      {subtitle && <div className="text-[11px] text-slate-400 mt-1.5">{subtitle}</div>}
     </div>
   );
 }

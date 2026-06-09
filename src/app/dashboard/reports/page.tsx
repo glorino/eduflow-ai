@@ -6,12 +6,12 @@ import { BarChart, DonutChart, HorizontalBarChart } from '@/components/charts';
 import { Toast } from '@/components/interactive';
 
 const reportTypes = [
-  { id: 'academic', title: 'Academic Performance', icon: '📊', description: 'Student grades, pass rates, subject analysis', lastGenerated: '2 hours ago' },
-  { id: 'attendance', title: 'Attendance Summary', icon: '📋', description: 'Daily, weekly, monthly attendance reports', lastGenerated: '5 hours ago' },
-  { id: 'finance', title: 'Financial Report', icon: '💰', description: 'Revenue, collections, outstanding, forecasts', lastGenerated: '1 day ago' },
-  { id: 'enrollment', title: 'Enrollment Analytics', icon: '🎓', description: 'Admission trends, demographics, retention', lastGenerated: '3 days ago' },
-  { id: 'discipline', title: 'Discipline Report', icon: '⚖️', description: 'Incidents, trends, interventions', lastGenerated: '1 week ago' },
-  { id: 'teacher', title: 'Teacher Performance', icon: '👩‍🏫', description: 'Ratings, workload, student feedback', lastGenerated: '2 days ago' },
+  { id: 'academic', title: 'Academic Performance', icon: '📊', description: 'Student grades, pass rates, subject analysis', lastGenerated: '2 hours ago', gradient: 'from-blue-500 to-blue-600' },
+  { id: 'attendance', title: 'Attendance Summary', icon: '📋', description: 'Daily, weekly, monthly attendance reports', lastGenerated: '5 hours ago', gradient: 'from-indigo-500 to-indigo-600' },
+  { id: 'finance', title: 'Financial Report', icon: '💰', description: 'Revenue, collections, outstanding, forecasts', lastGenerated: '1 day ago', gradient: 'from-cyan-500 to-cyan-600' },
+  { id: 'enrollment', title: 'Enrollment Analytics', icon: '🎓', description: 'Admission trends, demographics, retention', lastGenerated: '3 days ago', gradient: 'from-sky-500 to-sky-600' },
+  { id: 'discipline', title: 'Discipline Report', icon: '⚖️', description: 'Incidents, trends, interventions', lastGenerated: '1 week ago', gradient: 'from-blue-400 to-blue-500' },
+  { id: 'teacher', title: 'Teacher Performance', icon: '👩‍🏫', description: 'Ratings, workload, student feedback', lastGenerated: '2 days ago', gradient: 'from-indigo-400 to-indigo-500' },
 ];
 
 const topSubjects = [
@@ -39,7 +39,8 @@ export default function ReportsPage() {
 
       {/* Overview Charts */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        <div className="lg:col-span-2 bg-white rounded-2xl border border-slate-200/80 p-6">
+        <div className="lg:col-span-2 bg-white rounded-2xl border border-slate-200/80 relative overflow-hidden p-6">
+          <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-500 to-indigo-600" />
           <h3 className="text-base font-bold text-slate-900 mb-1">Performance Overview</h3>
           <p className="text-sm text-slate-500 mb-6">Average scores by term</p>
           <BarChart
@@ -52,7 +53,8 @@ export default function ReportsPage() {
             height={180}
           />
         </div>
-        <div className="bg-white rounded-2xl border border-slate-200/80 p-6">
+        <div className="bg-white rounded-2xl border border-slate-200/80 relative overflow-hidden p-6">
+          <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-500 to-indigo-600" />
           <h3 className="text-base font-bold text-slate-900 mb-1">Pass Rate</h3>
           <p className="text-sm text-slate-500 mb-6">Overall this term</p>
           <div className="flex justify-center">
@@ -61,7 +63,8 @@ export default function ReportsPage() {
         </div>
       </div>
 
-      <div className="bg-white rounded-2xl border border-slate-200/80 p-6">
+      <div className="bg-white rounded-2xl border border-slate-200/80 relative overflow-hidden p-6">
+        <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-500 to-indigo-600" />
         <h3 className="text-base font-bold text-slate-900 mb-5">Top Performing Subjects</h3>
         <HorizontalBarChart data={topSubjects} height={28} />
       </div>
@@ -71,7 +74,8 @@ export default function ReportsPage() {
         <h3 className="text-base font-bold text-slate-900 mb-4">Available Reports</h3>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {reportTypes.map(report => (
-            <div key={report.id} className="bg-white rounded-2xl border border-slate-200/80 p-6 hover:border-blue-200 hover:shadow-lg hover:shadow-blue-50 transition-all cursor-pointer group" onClick={() => setSelectedReport(report.id)}>
+            <div key={report.id} className="bg-white rounded-2xl border border-slate-200/80 relative overflow-hidden p-6 hover:border-blue-200 hover:shadow-lg hover:shadow-blue-50 transition-all cursor-pointer group" onClick={() => setSelectedReport(report.id)}>
+              <div className={`absolute top-0 left-0 right-0 h-1 bg-gradient-to-r ${report.gradient}`} />
               <div className="text-3xl mb-3 group-hover:scale-110 transition-transform">{report.icon}</div>
               <h4 className="text-base font-bold text-slate-900 mb-1">{report.title}</h4>
               <p className="text-sm text-slate-500 mb-4">{report.description}</p>

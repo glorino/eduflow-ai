@@ -48,7 +48,8 @@ export default function InventoryPage() {
         <StatCard title="Low Stock" value={lowStock} change={lowStock > 0 ? 'Needs attention' : 'All good'} changeType={lowStock > 0 ? 'negative' : 'positive'} icon="⚠️" color="rose" />
       </div>
 
-      <div className="bg-white rounded-2xl border border-slate-200/80 p-6">
+      <div className="relative overflow-hidden bg-white rounded-2xl border border-slate-200/80 p-6">
+        <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-emerald-500 to-teal-500" />
         <h3 className="text-base font-bold text-slate-900 mb-1">Stock by Category</h3>
         <p className="text-sm text-slate-500 mb-6">Item distribution</p>
         <BarChart
@@ -64,7 +65,8 @@ export default function InventoryPage() {
         />
       </div>
 
-      <div className="bg-white rounded-2xl border border-slate-200/80 overflow-hidden">
+      <div className="relative overflow-hidden bg-white rounded-2xl border border-slate-200/80">
+        <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-teal-500 to-emerald-500" />
         <div className="px-6 py-4 border-b border-slate-100"><h3 className="text-base font-bold text-slate-900">All Items</h3></div>
         <Table columns={columns} data={mockItems as unknown as Record<string, unknown>[]} rowKey="id" emptyIcon="📦" />
       </div>

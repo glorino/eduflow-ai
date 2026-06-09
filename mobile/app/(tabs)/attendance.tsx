@@ -1,8 +1,9 @@
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
-import { useState } from 'react';
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Alert } from 'react-native';
 
 export default function AttendanceScreen() {
-  const [selectedDate, setSelectedDate] = useState(new Date());
+  const handleViewFullReport = () => {
+    Alert.alert('Full Report', 'Full attendance report coming soon!');
+  };
 
   return (
     <ScrollView style={styles.container}>
@@ -61,7 +62,7 @@ export default function AttendanceScreen() {
         ))}
       </View>
 
-      <TouchableOpacity style={styles.reportButton}>
+      <TouchableOpacity style={styles.reportButton} onPress={handleViewFullReport}>
         <Text style={styles.reportButtonText}>View Full Report</Text>
       </TouchableOpacity>
     </ScrollView>

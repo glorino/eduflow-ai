@@ -3,13 +3,30 @@ import { useState } from 'react';
 
 export default function MessagesScreen() {
   const [message, setMessage] = useState('');
-
-  const messages = [
+  const [messages, setMessages] = useState([
     { sender: 'School Admin', message: 'School fees reminder: Payment due in 5 days', time: '2:30 PM', unread: true },
     { sender: 'Math Teacher', message: 'Assignment submitted successfully', time: '11:00 AM', unread: false },
     { sender: 'Library', message: 'Book return reminder: 2 days overdue', time: 'Yesterday', unread: true },
     { sender: 'Principal', message: 'School resumption notice', time: 'Jun 5', unread: false },
-  ];
+  ]);
+
+  const handleSend = () => {
+    const trimmed = message.trim();
+    if (!trimmed) return;
+
+    const now = new Date();
+    const hours = now.getHours();
+    const minutes = now.getMinutes().toString().padStart(2, '0');
+    const period = hours >= 12 ? 'PM' : 'AM';
+    const displayHour = hours % 12 || 12;
+    const timeString = `${displayHour}:${minutes} ${period}`;
+
+    setMessages([
+      { sender: 'You', message: trimmed, time: timeString, unread: false },
+      ...messages,
+    ]);
+    setMessage('');
+  };
 
   return (
     <View style={styles.container}>
@@ -42,7 +59,7 @@ export default function MessagesScreen() {
           value={message}
           onChangeText={setMessage}
         />
-        <TouchableOpacity style={styles.sendButton}>
+        <TouchableOpacity style={styles.sendButton} onPress={handleSend}>
           <Text style={styles.sendButtonText}>Send</Text>
         </TouchableOpacity>
       </View>

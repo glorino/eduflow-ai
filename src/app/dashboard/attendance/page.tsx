@@ -86,7 +86,8 @@ export default function AttendancePage() {
 
       {/* Charts */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        <div className="lg:col-span-2 bg-white rounded-2xl border border-slate-200/80 p-6">
+        <div className="lg:col-span-2 relative overflow-hidden bg-white rounded-2xl border border-slate-200/80 p-6">
+          <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-emerald-500 to-teal-600" />
           <h3 className="text-base font-bold text-slate-900 mb-1">Weekly Trend</h3>
           <p className="text-sm text-slate-500 mb-6">Attendance rate by day</p>
           <BarChart
@@ -100,7 +101,8 @@ export default function AttendancePage() {
             height={180}
           />
         </div>
-        <div className="bg-white rounded-2xl border border-slate-200/80 p-6">
+        <div className="relative overflow-hidden bg-white rounded-2xl border border-slate-200/80 p-6">
+          <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-emerald-500 to-teal-600" />
           <h3 className="text-base font-bold text-slate-900 mb-1">Today&apos;s Status</h3>
           <p className="text-sm text-slate-500 mb-6">All campuses</p>
           <div className="flex justify-center">
@@ -110,7 +112,8 @@ export default function AttendancePage() {
       </div>
 
       {/* Class Summary */}
-      <div className="bg-white rounded-2xl border border-slate-200/80 p-6">
+      <div className="relative overflow-hidden bg-white rounded-2xl border border-slate-200/80 p-6">
+        <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-emerald-500 to-teal-600" />
         <h3 className="text-base font-bold text-slate-900 mb-5">Class Summary</h3>
         <div className="space-y-3">
           {classSummary.map(c => (
@@ -140,7 +143,8 @@ export default function AttendancePage() {
         </select>
       </div>
 
-      <div className="bg-white rounded-2xl border border-slate-200/80 overflow-hidden">
+      <div className="relative overflow-hidden bg-white rounded-2xl border border-slate-200/80">
+        <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-emerald-500 to-teal-600" />
         <Table columns={columns} data={filtered as unknown as Record<string, unknown>[]} rowKey="id" emptyMessage="No attendance records" emptyIcon="📋" />
       </div>
 

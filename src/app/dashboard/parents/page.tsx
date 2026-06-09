@@ -35,7 +35,7 @@ export default function ParentsPage() {
     { key: 'children', header: 'Children', render: (row: typeof mockParents[0]) => <div>{row.children.map((c, i) => <Badge key={i} variant="blue">{c}</Badge>)}</div> },
     { key: 'campus', header: 'Campus', render: (row: typeof mockParents[0]) => <span className="text-slate-600">{row.campus}</span> },
     { key: 'lastContact', header: 'Last Contact', render: (row: typeof mockParents[0]) => <span className="text-slate-500 text-sm">{row.lastContact}</span> },
-    { key: 'actions', header: '', className: 'w-24', render: () => <div className="flex gap-1" onClick={e => e.stopPropagation()}><button className="px-2.5 py-1.5 text-xs font-medium text-blue-700 bg-blue-50 rounded-lg hover:bg-blue-100">Message</button></div> },
+    { key: 'actions', header: '', className: 'w-24', render: () => <div className="flex gap-1" onClick={e => e.stopPropagation()}><button className="px-2.5 py-1.5 text-xs font-medium text-emerald-700 bg-emerald-50 rounded-lg hover:bg-emerald-100">Message</button></div> },
   ];
 
   return (
@@ -50,13 +50,26 @@ export default function ParentsPage() {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        <div className="lg:col-span-2 bg-white rounded-2xl border border-slate-200/80 overflow-hidden">
+        <div className="lg:col-span-2 bg-white rounded-2xl border border-slate-200/80 relative overflow-hidden">
+          <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-emerald-500 to-teal-600" />
           <div className="px-6 py-4 border-b border-slate-100"><h3 className="text-base font-bold text-slate-900">Parents Directory</h3></div>
           <Table columns={columns} data={mockParents as unknown as Record<string, unknown>[]} rowKey="id" emptyIcon="👨‍👩‍👧" />
         </div>
-        <div className="bg-white rounded-2xl border border-slate-200/80 p-6">
+        <div className="bg-white rounded-2xl border border-slate-200/80 relative overflow-hidden p-6">
+          <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-emerald-500 to-teal-600" />
           <h3 className="text-base font-bold text-slate-900 mb-5">Recent Communications</h3>
-          <Timeline items={recentMessages} />
+          <div className="space-y-3">
+            {recentMessages.map((msg, i) => (
+              <div key={i} className="flex items-start gap-3 p-3 bg-emerald-50 rounded-xl">
+                <span className="text-xl">{msg.icon}</span>
+                <div className="flex-1 min-w-0">
+                  <div className="font-semibold text-slate-900 text-sm">{msg.title}</div>
+                  <div className="text-xs text-slate-500">{msg.description}</div>
+                  <div className="text-[11px] text-slate-400 mt-1">{msg.time}</div>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
 
@@ -65,7 +78,7 @@ export default function ParentsPage() {
           <FormSelect label="Recipient" options={mockParents.map(p => ({ value: p.id, label: p.name }))} required />
           <FormSelect label="Channel" options={[{ value: 'email', label: 'Email' }, { value: 'sms', label: 'SMS' }, { value: 'whatsapp', label: 'WhatsApp' }, { value: 'in_app', label: 'In-App' }]} required />
           <FormSelect label="Template" options={[{ value: 'fee', label: 'Fee Reminder' }, { value: 'attendance', label: 'Attendance Alert' }, { value: 'progress', label: 'Progress Report' }, { value: 'meeting', label: 'Meeting Invite' }, { value: 'custom', label: 'Custom Message' }]} />
-          <div><label className="block text-sm font-medium text-slate-700 mb-1.5">Message</label><textarea rows={4} className="w-full px-4 py-2.5 bg-white border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 resize-none" placeholder="Type your message..." /></div>
+          <div><label className="block text-sm font-medium text-slate-700 mb-1.5">Message</label><textarea rows={4} className="w-full px-4 py-2.5 bg-white border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 resize-none" placeholder="Type your message..." /></div>
         </div>
       </Modal>
       {toast && <Toast message={toast.message} type={toast.type} onClose={() => setToast(null)} />}

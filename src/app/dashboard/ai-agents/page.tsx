@@ -17,6 +17,7 @@ const agents = [
     totalProcessed: 1247,
     avgResponseTime: '2.3s',
     color: 'from-blue-500 to-blue-600',
+    bg: 'bg-blue-50',
   },
   {
     id: 'academic',
@@ -29,6 +30,7 @@ const agents = [
     totalProcessed: 892,
     avgResponseTime: '1.8s',
     color: 'from-violet-500 to-violet-600',
+    bg: 'bg-violet-50',
   },
   {
     id: 'attendance',
@@ -41,6 +43,7 @@ const agents = [
     totalProcessed: 3450,
     avgResponseTime: '0.5s',
     color: 'from-emerald-500 to-emerald-600',
+    bg: 'bg-emerald-50',
   },
   {
     id: 'finance',
@@ -53,6 +56,7 @@ const agents = [
     totalProcessed: 2100,
     avgResponseTime: '1.2s',
     color: 'from-amber-500 to-amber-600',
+    bg: 'bg-amber-50',
   },
   {
     id: 'cbt',
@@ -65,6 +69,7 @@ const agents = [
     totalProcessed: 567,
     avgResponseTime: '3.1s',
     color: 'from-cyan-500 to-cyan-600',
+    bg: 'bg-cyan-50',
   },
   {
     id: 'parent',
@@ -77,6 +82,7 @@ const agents = [
     totalProcessed: 1890,
     avgResponseTime: '1.5s',
     color: 'from-rose-500 to-rose-600',
+    bg: 'bg-rose-50',
   },
   {
     id: 'library',
@@ -89,6 +95,7 @@ const agents = [
     totalProcessed: 780,
     avgResponseTime: '0.8s',
     color: 'from-indigo-500 to-indigo-600',
+    bg: 'bg-indigo-50',
   },
   {
     id: 'discipline',
@@ -101,6 +108,7 @@ const agents = [
     totalProcessed: 234,
     avgResponseTime: '2.0s',
     color: 'from-orange-500 to-orange-600',
+    bg: 'bg-orange-50',
   },
   {
     id: 'alumni',
@@ -113,6 +121,7 @@ const agents = [
     totalProcessed: 456,
     avgResponseTime: '4.2s',
     color: 'from-teal-500 to-teal-600',
+    bg: 'bg-teal-50',
   },
   {
     id: 'reporting',
@@ -125,6 +134,7 @@ const agents = [
     totalProcessed: 1560,
     avgResponseTime: '2.7s',
     color: 'from-pink-500 to-pink-600',
+    bg: 'bg-pink-50',
   },
 ];
 
@@ -174,8 +184,9 @@ export default function AIAgentsPage() {
               <div
                 key={agent.id}
                 onClick={() => setSelectedAgent(agent)}
-                className="bg-white rounded-2xl border border-slate-200/80 p-5 hover:border-blue-200 hover:shadow-lg hover:shadow-blue-50 transition-all cursor-pointer group"
+                className="bg-white rounded-2xl border border-slate-200/80 relative overflow-hidden p-5 hover:border-blue-200 hover:shadow-lg hover:shadow-blue-50 transition-all cursor-pointer group"
               >
+                <div className={`absolute top-0 left-0 right-0 h-1 bg-gradient-to-r ${agent.color}`} />
                 <div className="flex items-start gap-4">
                   <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${agent.color} flex items-center justify-center text-2xl flex-shrink-0 group-hover:scale-110 transition-transform`}>
                     {agent.icon}
@@ -201,7 +212,8 @@ export default function AIAgentsPage() {
         </div>
 
         {/* Activity Log */}
-        <div className="bg-white rounded-2xl border border-slate-200/80 p-6">
+        <div className="bg-white rounded-2xl border border-slate-200/80 relative overflow-hidden p-6">
+          <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-500 to-violet-600" />
           <h3 className="text-base font-bold text-slate-900 mb-5">Agent Activity</h3>
           <Timeline items={activityLog} />
         </div>
@@ -227,10 +239,10 @@ export default function AIAgentsPage() {
               </div>
             </div>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-              <div className="bg-slate-50 rounded-xl p-4 text-center"><div className="text-2xl font-bold text-slate-900">{selectedAgent.tasksToday}</div><div className="text-xs text-slate-500">Tasks Today</div></div>
-              <div className="bg-slate-50 rounded-xl p-4 text-center"><div className="text-2xl font-bold text-emerald-600">{selectedAgent.accuracy}%</div><div className="text-xs text-slate-500">Accuracy</div></div>
-              <div className="bg-slate-50 rounded-xl p-4 text-center"><div className="text-2xl font-bold text-slate-900">{selectedAgent.totalProcessed.toLocaleString()}</div><div className="text-xs text-slate-500">Total Processed</div></div>
-              <div className="bg-slate-50 rounded-xl p-4 text-center"><div className="text-2xl font-bold text-slate-900">{selectedAgent.avgResponseTime}</div><div className="text-xs text-slate-500">Avg Response</div></div>
+              <div className={`${selectedAgent.bg} rounded-xl p-4 text-center`}><div className="text-2xl font-bold text-slate-900">{selectedAgent.tasksToday}</div><div className="text-xs text-slate-500">Tasks Today</div></div>
+              <div className={`${selectedAgent.bg} rounded-xl p-4 text-center`}><div className="text-2xl font-bold text-emerald-600">{selectedAgent.accuracy}%</div><div className="text-xs text-slate-500">Accuracy</div></div>
+              <div className={`${selectedAgent.bg} rounded-xl p-4 text-center`}><div className="text-2xl font-bold text-slate-900">{selectedAgent.totalProcessed.toLocaleString()}</div><div className="text-xs text-slate-500">Total Processed</div></div>
+              <div className={`${selectedAgent.bg} rounded-xl p-4 text-center`}><div className="text-2xl font-bold text-slate-900">{selectedAgent.avgResponseTime}</div><div className="text-xs text-slate-500">Avg Response</div></div>
             </div>
             <div className="flex gap-3">
               <Button onClick={() => setToast({ message: `${selectedAgent.name} refreshed`, type: 'success' })}>Refresh Agent</Button>
