@@ -52,7 +52,8 @@ const navSections = [
     label: 'Intelligence',
     items: [
       { name: 'AI Agents', href: '/dashboard/ai-agents', icon: '🤖', badge: '10', color: 'bg-violet-100 text-violet-700' },
-      { name: 'Alumni', href: '/dashboard/alumni', icon: '🏛️', color: 'bg-slate-100 text-slate-700' },
+      { name: 'Boardroom', href: '/dashboard/boardroom', icon: '🏛️', color: 'bg-indigo-100 text-indigo-700' },
+      { name: 'Alumni', href: '/dashboard/alumni', icon: '🎓', color: 'bg-slate-100 text-slate-700' },
     ],
   },
   {
