@@ -350,6 +350,7 @@ model Student {
   earnedBadges        StudentBadge[]
   studyStreak         StudyStreak?
   transcripts         TranscriptLog[]
+  cbtAccesses         CBTExamAccess[]
 }
 
 model Parent {
@@ -987,4 +988,237 @@ model StudyStreak {
   updatedAt      DateTime  @updatedAt
 
   student Student @relation(fields: [studentId], references: [id])
+}
+
+// ============================================================
+// CBT FEE-PAYMENT GATE
+// ============================================================
+
+model CBTExamAccess {
+  id         String    @id @default(cuid())
+  studentId  String
+  examId     String
+  hasPaid    Boolean   @default(false)
+  paymentRef String?
+  paidAt     DateTime?
+  createdAt  DateTime  @default(now())
+
+  student Student @relation(fields: [studentId], references: [id])
+
+  @@unique([studentId, examId])
+  @@index([studentId])
+}
+
+// ============================================================
+// WEBSITE CMS
+// ============================================================
+
+model WebsiteNews {
+  id          String    @id @default(cuid())
+  title       String
+  slug        String    @unique
+  content     String
+  excerpt     String?
+  imageUrl    String?
+  author      String
+  published   Boolean   @default(false)
+  publishedAt DateTime?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  @@index([published])
+}
+
+model WebsiteEvent {
+  id          String    @id @default(cuid())
+  title       String
+  description String
+  location    String?
+  startDate   DateTime
+  endDate     DateTime?
+  imageUrl    String?
+  published   Boolean   @default(true)
+  createdAt   DateTime  @default(now())
+
+  @@index([startDate])
+}
+
+model WebsiteGallery {
+  id          String   @id @default(cuid())
+  title       String
+  description String?
+  imageUrl    String
+  category    String   @default("general")
+  sortOrder   Int      @default(0)
+  createdAt   DateTime @default(now())
+
+  @@index([category])
+}
+
+model WebsiteTestimonial {
+  id        String   @id @default(cuid())
+  name      String
+  role      String // parent, student, alumni
+  content   String
+  rating    Int      @default(5)
+  approved  Boolean  @default(false)
+  createdAt DateTime @default(now())
+
+  @@index([approved])
+}
+
+model WebsiteContact {
+  id        String   @id @default(cuid())
+  name      String
+  email     String
+  phone     String?
+  subject   String
+  message   String
+  read      Boolean  @default(false)
+  replied   Boolean  @default(false)
+  createdAt DateTime @default(now())
+
+  @@index([read])
+}
+
+model WebsiteSetting {
+  id        String   @id @default(cuid())
+  key       String   @unique
+  value     String
+  updatedAt DateTime @updatedAt
+}
+
+// ============================================================
+// HOSTEL DEPTH FEATURES
+// ============================================================
+
+model HostelVisitor {
+  id           String    @id @default(cuid())
+  studentId    String
+  visitorName  String
+  visitorPhone String?
+  relationship String
+  purpose      String
+  visitDate    DateTime  @default(now())
+  checkInTime  DateTime?
+  checkOutTime DateTime?
+  status       String    @default("checked_in") // checked_in, checked_out
+  idDocument   String?
+  photoUrl     String?
+  createdAt    DateTime  @default(now())
+
+  @@index([studentId])
+}
+
+model HostelIncident {
+  id          String    @id @default(cuid())
+  reportedBy  String
+  category    String // theft, fighting, noise, property_damage, health, other
+  severity    String    @default("low") // low, medium, high, critical
+  description String
+  location    String?
+  status      String    @default("open") // open, investigating, resolved, closed
+  resolvedBy  String?
+  resolvedAt  DateTime?
+  createdAt   DateTime  @default(now())
+
+  @@index([status])
+}
+
+model HostelMaintenance {
+  id          String    @id @default(cuid())
+  reportedBy  String
+  category    String // plumbing, electrical, furniture, structural, other
+  description String
+  location    String
+  priority    String    @default("medium") // low, medium, high, urgent
+  status      String    @default("pending") // pending, in_progress, completed
+  assignedTo  String?
+  cost        Float?
+  completedAt DateTime?
+  createdAt   DateTime  @default(now())
+
+  @@index([status])
+}
+
+model HostelParcel {
+  id           String    @id @default(cuid())
+  studentId    String
+  senderName   String
+  description  String
+  receivedBy   String
+  receivedAt   DateTime  @default(now())
+  claimedAt    DateTime?
+  status       String    @default("received") // received, claimed
+  trackingCode String    @unique
+
+  @@index([studentId])
+}
+
+model CCTVEvent {
+  id          String   @id @default(cuid())
+  cameraId    String
+  eventType   String // motion_detected, access_denied, tamper_alert, offline, other
+  severity    String   @default("info") // info, warning, critical
+  description String?
+  imageUrl    String?
+  recordedAt  DateTime @default(now())
+
+  @@index([cameraId])
+  @@index([recordedAt])
+}
+
+// ============================================================
+// ADMISSION APPEALS
+// ============================================================
+
+model AdmissionAppeal {
+  id             String    @id @default(cuid())
+  admissionId    String
+  applicantName  String
+  reason         String
+  supportingDocs String? // JSON array of document URLs
+  status         String    @default("pending") // pending, under_review, approved, rejected
+  reviewedBy     String?
+  reviewNotes    String?
+  reviewedAt     DateTime?
+  createdAt      DateTime  @default(now())
+
+  @@index([status])
+}
+
+// ============================================================
+// ALUMNI DONATIONS
+// ============================================================
+
+model AlumniDonation {
+  id             String   @id @default(cuid())
+  alumniId       String
+  amount         Float
+  currency       String   @default("NGN")
+  purpose        String // general, scholarship, infrastructure, event
+  paymentRef     String   @unique
+  flutterwaveRef String?
+  status         String   @default("pending") // pending, completed, failed
+  anonymous      Boolean  @default(false)
+  message        String?
+  createdAt      DateTime @default(now())
+
+  @@index([alumniId])
+  @@index([status])
+}
+
+model AlumniSpotlight {
+  id          String   @id @default(cuid())
+  alumniId    String
+  title       String
+  story       String
+  imageUrl    String?
+  yearOfGrad  String?
+  currentRole String?
+  company     String?
+  featured    Boolean  @default(false)
+  createdAt   DateTime @default(now())
+
+  @@index([featured])
 }
